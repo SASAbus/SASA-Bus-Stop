@@ -1,0 +1,164 @@
+.slideshow-container{
+	position:relative;
+	height:100%;
+}
+.content{
+	width:83%;
+	float:left;
+}
+.partner{
+	float:right;
+	width:15%;
+	height:100%;
+	position:relative;
+	border-right: 1px solid #c6c6c6;
+	background: rgba(246,246,246,0.67);
+}
+.partner-content{
+	position:absolute;
+	bottom:0;
+	left:30%;
+}
+.partner-header{
+	text-align:center;
+	margin-bottom:50px;
+	padding-bottom:5px;
+	border-bottom:1px solid #e4e4e4;	
+}
+.partner img{
+	margin-bottom:40px;
+	width:120px;
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+	padding:7px;
+	opacity:0.8;
+}
+body,html{
+	overflow:hidden;
+	height:100%;
+}
+h1{
+	color:#00adef;
+}
+.changes{
+	margin-right:10px
+}
+.status{
+	text-align: right;
+	font-size: 90px;
+}
+.control-panel{
+	position:absolute;
+	top:5px;
+	right:10px;
+	opacity:0.4;
+	z-index:20;
+	width:400px;
+	line-height:30px;
+}
+.lines{
+	color:#fff;
+	width:40%;
+
+}
+.line{
+	background-color:#ff7d21;
+	margin:35px 0;
+	padding: 30px;
+	font-size:80px;
+}
+.line{
+	position:relative;
+	display:block;
+	max-height:200px;
+
+}
+.line.ng-enter {
+	-webkit-transition:0.5s linear all;
+	-moz-transition:0.5s linear all;
+	-o-transition:0.5s linear all;
+    	transition:0.5s linear all;
+	max-height: 0;
+	opacity: 0;
+	left: -1000px;
+
+}
+.line.ng-enter.ng-enter-active {
+	max-height: 200px;
+	opacity: 1;
+    	left: 0;
+}
+.line.ng-leave {
+  -webkit-animation:0.8s my_animation;
+  -moz-animation:0.8s my_animation;
+  -o-animation:0.8s my_animation;
+  animation:0.8s my_animation;
+}
+ 
+@keyframes my_animation {
+  from {
+    max-height: 200px;
+    opacity: 1;
+    left: 0;
+    margin:35px 0;
+    padding: 30px;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+    left: -1000px;
+    margin:0;
+    padding: 0;
+  }
+}
+ 
+/*
+  Unfortunately each browser vendor requires
+  its own definition of keyframe animation code...
+*/
+@-webkit-keyframes my_animation {
+  from {
+    max-height: 200px;
+    opacity: 1;
+    left: 0;
+    margin:35px 0;
+    padding: 30px;
+  }
+  to {
+    max-height: 0;
+    opacity: 0;
+    left: -1000px;
+    margin:0;
+    padding: 0;
+  }
+}
+.footer{
+	position:absolute;
+	bottom:0;
+	width:100%;
+	z-index:500;
+	background-color:#f3f3f3;
+	height:150px;
+	line-height:150px;
+	font-size:40px;
+}
+.notes{
+	position:absolute;
+	left:3500px;
+	white-space:nowrap;
+}
+.move-note{
+	left:-3500px;
+	-webkit-transition:20s linear all;
+        -moz-transition:20s linear all;
+        -o-transition:20s linear all;
+        transition:20s linear all;
+}
+.clock{
+	padding:20px;
+	font-size:40px;
+	position:absolute;
+	top:0;
+	right:0;
+}

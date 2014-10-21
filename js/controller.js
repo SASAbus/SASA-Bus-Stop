@@ -1,4 +1,4 @@
-var busstop = angular.module('busstop', ['ngRoute','ngAnimate']);
+var busstop = angular.module('busstop', ['ngRoute','ngAnimate','sportsTicker']);
 busstop.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
@@ -17,14 +17,6 @@ busstop.config(['$routeProvider',
 
 busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$routeParams,$timeout) {
 	var self= $scope;
-	var notes=[{text:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et"},
-	{
-        text:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt"},
-{
-        text:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et"},
-{
-        text:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et"}
-	];
 	var numberOfLines = 1000;
  	var lineId = 5029;
 	if ($routeParams.lineId != null)
@@ -40,14 +32,16 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		});
 	}
 	self.refreshInfos = function(){
-		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+lineId+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
-			self.notes=notes;	
-			self.$watch('notes', function() {
-       				$timeout(self.moveNote(),2000);
-			});
+		$http.jsonp("http://www.sasabz.it/android/android_json.php?callback=JSON_CALLBACK").success(function(data, status, headers, config) {
+			self.notes=data;
+			console.log(self.notes);	
+       			self.moveNote();
+			
 		});
 	};
 
+	self.$watch('notes', function() {
+	});
 	self.elaborateData = function(data)	{
 		data=data.slice(0,numberOfLines);
 		self.calcArrival(data);
@@ -101,7 +95,6 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 			angular.element(".notes").removeClass("move-note");	
 			i=0;
 		}
-		console.log(i);
      		angular.element("#element"+i).addClass("move-note");
 		i++;
 		$timeout(function() {

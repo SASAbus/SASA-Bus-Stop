@@ -1,4 +1,4 @@
-var busstop = angular.module('busstop', ['ngRoute','ngAnimate']);
+var busstop = angular.module('busstop', ['ngRoute','ngAnimate','ngSanitize']);
 busstop.config(['$routeProvider',
   function($routeProvider) {
     $routeProvider.
@@ -36,7 +36,9 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 			self.notes=data;	
 		});
 	};
-
+	self.$watch('notes', function() {
+		self.moveNote();
+   	});
 	self.elaborateData = function(data)	{
 		data=data.slice(0,numberOfLines);
 		self.calcArrival(data);
@@ -89,16 +91,19 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 	}
 	
 	self.moveNote = function(i){
-		if (i> self.notes.length||i==undefined){
-			angular.element(".notes").removeClass("move-note");	
+		if ( i==undefined || i> self.notes.length){
 			i=0;
 		}
-		console.log(i);
-     		angular.element("#element"+i).addClass("move-note");
+		var element = angular.element("#element"+i); 
+		var deviceWidth = $( document ).width();
+		var elementWidth = element.width();
+		var scrollSpeed = Math.floor(elementWidth * 1000);
+		var effect = '@keyframes #element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}';
+		console.log(effect);
 		i++;
 		$timeout(function() {
 			self.moveNote(i);
-   		}, 20000);   
+   		}, 5000);   
 	};
 	$interval(function() {self.clock=moment().format("HH:mm:ss");}, 1000);
 	$interval(self.refreshLines,5000);

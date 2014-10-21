@@ -23,7 +23,7 @@
 </div>
 <div class="footer" ng-init="refreshInfos();">
 	<div ng-repeat="note in notes" class="notes" id="element{{$index}}">
-               <div class="note">{{note.titel_de}}: {{note.nachricht_de}}</div>
+               <div class="note">{{note.titel_de}}: <span ng-bind-html="note.nachricht_de"></span></div>
        </div>
 </div> 
 

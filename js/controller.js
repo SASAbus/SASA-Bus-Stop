@@ -17,14 +17,6 @@ busstop.config(['$routeProvider',
 
 busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$routeParams,$timeout) {
 	var self= $scope;
-	var notes=[{text:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et"},
-	{
-        text:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt"},
-{
-        text:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et"},
-{
-        text:"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et"}
-	];
 	var numberOfLines = 1000;
  	var lineId = 5029;
 	if ($routeParams.lineId != null)
@@ -40,11 +32,8 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		});
 	}
 	self.refreshInfos = function(){
-		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+lineId+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
-			self.notes=notes;	
-			self.$watch('notes', function() {
-       				$timeout(self.moveNote(),2000);
-			});
+		$http.jsonp("http://www.sasabz.it/android/android_json.php?callback=JSON_CALLBACK").success(function(data, status, headers, config) {
+			self.notes=data;	
 		});
 	};
 
@@ -70,8 +59,11 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		for (i in data){
 			var arrivalTime = moment();
 			var delay = data[i].delay;
-			arrivalTime.hour(data[i].arrival.substring(0,2));
-			arrivalTime.minute(data[i].arrival.substring(3,5));
+			var arrivalString = data[i].arrival.toString();
+			if (arrivalString.length===4)
+				arrivalString = "0"+arrivalString;
+			arrivalTime.hour(arrivalString.substring(0,2));
+			arrivalTime.minute(arrivalString.substring(3,5));
 			if (delay!=null)
 				arrivalTime.add(data[i].delay,'minutes');
 			var comesIn = Math.round(arrivalTime.diff(now)/60/1000);

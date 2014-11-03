@@ -1,29 +1,40 @@
+<header>
+<div class="container-fluid">
+	<div class="row headline">
+		
+		<div class="col-xs-2"><strong class="glyphicon glyphicon-plane"></strong></div>
+		<div class="col-xs-1">
+			<strong class="glyphicon glyphicon-time"><!-- --></strong>
+		</div>
+		<div my-clock="HH:mm" class="clock"><!----></div>
+	</div> 
+</header>
 <div class="slideshow-container" ng-controller="BusStopCtrl">
 		<div ng-show="warning">System not working</div>
 		
 		<div class="content container-fluid" ng-init="refreshLines();">
-		<div class="clock">{{clock}}</div>
 			<div class="lines">
 				<div ng-repeat="line in lines | orderBy:'comesIn'" class="row line">
-					<div class="col-xs-9">{{line.lidname}}</div>
-					<div class="col-xs-3">
-						<span>{{line.comesIn}}'</span>
+					<div class="marker"><div></div></div>
+					<div class="col-xs-2"><strong>{{line.lidname}}</strong></div>
+					<div class="col-xs-1">
+						<strong>{{line.comesIn}}'</strong>
 					</div>
 				</div>	
 			</div>
 		</div>
-		<div class="partner">
+		<!--<div class="partner">
 			<div class="partner-content">
 				<div>
 					<a href="http://www.sasabz.it/bozen/" target="_blank" title="SASA"><img class="img-rounded"
 						src="http://www.sasabz.it/fileadmin/vorlage/img/logo.gif"/></a>
 				</div>
 			</div>
-		</div>
+		</div>-->
 </div>
 <div class="footer" ng-init="refreshInfos();">
 	<div ng-repeat="note in notes" class="notes" id="element{{$index}}">
-               <div class="note">{{note.titel_de}}: <span ng-bind-html="note.nachricht_de"></span></div>
+               <div class="note"><span ng-bind-html="note.text"></span></div>
        </div>
 </div> 
 

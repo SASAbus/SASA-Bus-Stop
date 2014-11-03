@@ -14,7 +14,30 @@ busstop.config(['$routeProvider',
         redirectTo: '/'
       });
   }]);
+busstop.directive('myClock', ['$interval', 'dateFilter', function($interval, dateFilter) {
 
+    function link(scope, element, attrs) {
+      var format,
+          timeoutId;
+
+      format = attrs.myClock;
+      updateTime();
+      function updateTime() {
+        element.text(dateFilter(new Date(), format));
+      }
+
+      element.on('$destroy', function() {
+        $interval.cancel(timeoutId);
+      });
+
+      timeoutId = $interval(function() {
+        updateTime(); // update DOM
+      }, 1000);
+    }
+    return {
+      link: link
+    };
+}]);
 busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$routeParams,$timeout) {
 	var self= $scope;
 	var numberOfLines = 1000;
@@ -33,9 +56,16 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 	}
 	self.refreshInfos = function(){
 		$http.jsonp("http://www.sasabz.it/android/android_json.php?callback=JSON_CALLBACK").success(function(data, status, headers, config) {
-			self.notes=data;	
+			self.notes = self.assembleNotes(data);
 		});
 	};
+	self.assembleNotes = function(data){
+		for (i in data){
+			data[i]['text']=data[i].titel_de+':&nbsp'+data[i].nachricht_de+'&nbsp;&nbsp;&nbsp;'+data[i].titel_it+':&nbsp '+data[i].nachricht_it;
+		}
+		console.log(data);
+		return data;
+	}
 	self.$watch('notes', function() {
 		self.moveNote();
    	});
@@ -91,21 +121,25 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 	}
 	
 	self.moveNote = function(i){
-		if ( i==undefined || i> self.notes.length){
+		if ( i==undefined || self.notes==undefined || i> self.notes.length){
 			i=0;
 		}
 		var element = angular.element("#element"+i); 
 		var deviceWidth = $( document ).width();
 		var elementWidth = element.width();
-		var scrollSpeed = Math.floor(elementWidth * 1000);
-		var effect = '@keyframes #element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}';
-		console.log(effect);
+		var scrollSpeed = Math.floor(elementWidth*3);
+		var googleEffect = '@-webkit-keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}';
+		var effect = '@keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}'+googleEffect;
+		var googleScroll  = '#element'+i+ '{-webkit-animation: element' +i+ ' ' +scrollSpeed+'ms linear;}';
+		var scroll  = '#element'+i+ '{animation: element' +i+ ' ' +scrollSpeed+'ms linear;}'+googleScroll;
 		i++;
+		
+		$('head').find('#animationStyles').remove();
+                $('head').append('<style id="animationStyles" type="text/css">' + effect +scroll+ '</style>');
 		$timeout(function() {
 			self.moveNote(i);
-   		}, 5000);   
+   		}, scrollSpeed);   
 	};
-	$interval(function() {self.clock=moment().format("HH:mm:ss");}, 1000);
-	$interval(self.refreshLines,5000);
+	$interval(self.refreshLines,20000);
 	$interval(self.refreshInfos,300000);
 });

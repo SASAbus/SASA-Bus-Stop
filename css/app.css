@@ -3,8 +3,7 @@
 	height:100%;
 }
 .content{
-	width:83%;
-	float:left;
+	background-color:#111111;
 }
 .partner{
 	float:right;
@@ -37,6 +36,7 @@
 body,html{
 	overflow:hidden;
 	height:100%;
+	text-align:center;
 }
 h1{
 	color:#00adef;
@@ -59,14 +59,17 @@ h1{
 }
 .lines{
 	color:#fff;
-	width:40%;
 
 }
 .line{
-	background-color:#ff7d21;
-	margin:35px 0;
+	background-color:#000;
+	margin:0;
 	padding: 30px;
 	font-size:80px;
+	position:relative;
+}
+.line:nth-child(2n-1){
+	background-color:#111111;
 }
 .line{
 	position:relative;
@@ -122,23 +125,22 @@ h1{
     max-height: 200px;
     opacity: 1;
     left: 0;
-    margin:35px 0;
     padding: 30px;
   }
   to {
     max-height: 0;
     opacity: 0;
     left: -1000px;
-    margin:0;
     padding: 0;
   }
 }
 .footer{
+	color:#fff;
 	position:absolute;
 	bottom:0;
 	width:100%;
 	z-index:500;
-	background-color:#f3f3f3;
+	background-color:#000;
 	height:150px;
 	line-height:150px;
 	font-size:40px;
@@ -161,4 +163,28 @@ h1{
 	position:absolute;
 	top:0;
 	right:0;
+}
+.headline{
+	font-size:100px;
+	background-color:#000;
+	color:#fff;
+	border-bottom:2px solid #fff;
+	text-align:center;
+	padding-top:20px;
+	
+}
+
+.marker{
+	position:absolute;
+	left:0;
+	top:50%;
+	height:50%;
+} 
+.marker>div{
+	width:25px;
+	height:100%;
+	background-color:#fff;
+	top:-50%;
+	display:block;
+	position:relative;
 }

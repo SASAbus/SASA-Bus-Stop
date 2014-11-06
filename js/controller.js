@@ -42,6 +42,7 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 	var self= $scope;
 	var numberOfLines = 1000;
  	var lineId = 5029;
+	var scrollFactor=4;
 	if ($routeParams.lineId != null)
 		lineId = $routeParams.lineId;
 	self.lines = new Array();
@@ -63,7 +64,6 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		for (i in data){
 			data[i]['text']=data[i].titel_de+':&nbsp'+data[i].nachricht_de+'&nbsp;&nbsp;&nbsp;'+data[i].titel_it+':&nbsp '+data[i].nachricht_it;
 		}
-		console.log(data);
 		return data;
 	}
 	self.$watch('notes', function() {
@@ -127,7 +127,7 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		var element = angular.element("#element"+i); 
 		var deviceWidth = $( document ).width();
 		var elementWidth = element.width();
-		var scrollSpeed = Math.floor(elementWidth*3);
+		var scrollSpeed = Math.floor(elementWidth*scrollFactor);
 		var googleEffect = '@-webkit-keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}';
 		var effect = '@keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}'+googleEffect;
 		var googleScroll  = '#element'+i+ '{-webkit-animation: element' +i+ ' ' +scrollSpeed+'ms linear;}';

@@ -37,6 +37,7 @@ body,html{
 	overflow:hidden;
 	height:100%;
 	text-align:center;
+	font-family: Arial,sans-serif !important;
 }
 h1{
 	color:#00adef;
@@ -62,20 +63,17 @@ h1{
 
 }
 .line{
-	background-color:#000;
+	//background-color:#111111;
+	background-color:#303030;
 	margin:0;
 	padding: 30px;
 	font-size:80px;
 	position:relative;
+	display:block;
+	height:200px;
 }
 .line:nth-child(2n-1){
-	background-color:#111111;
-}
-.line{
-	position:relative;
-	display:block;
-	max-height:200px;
-
+	background-color:#000;
 }
 .line.ng-enter {
 	-webkit-transition:0.5s linear all;
@@ -141,7 +139,7 @@ h1{
 	width:100%;
 	z-index:500;
 	background-color:#000;
-	height:150px;
+	height:122px;
 	line-height:150px;
 	font-size:40px;
 }
@@ -158,22 +156,21 @@ h1{
         transition:20s linear all;
 }
 .clock{
-	padding:20px;
-	font-size:40px;
-	position:absolute;
-	top:0;
-	right:0;
+	font-size:80px;
 }
 .headline{
-	font-size:100px;
+	font-size:80px;
 	background-color:#000;
 	color:#fff;
 	border-bottom:2px solid #fff;
 	text-align:center;
-	padding-top:20px;
+	padding:20px 0;
+	height:145px;
 	
 }
-
+.headline svg{
+	fill:#fff;
+}
 .marker{
 	position:absolute;
 	left:0;
@@ -187,4 +184,9 @@ h1{
 	top:-50%;
 	display:block;
 	position:relative;
+}
+.stationname{
+	font-size:60px;
+	line-height:50px;
+
 }

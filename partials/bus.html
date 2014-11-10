@@ -28,14 +28,24 @@
 					<div class="marker"><div></div></div>
 					<div class="col-xs-2"><strong>{{line.lidname}}</strong></div>
 					<div class="col-xs-1">
-						<strong>{{line.comesIn}}'</strong>
+						<strong ng-hide="line.comesIn<=1">{{line.comesIn}}'</strong>
+						<svg ng-show="line.comesIn<=1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" version="1.1" id="Ebene_1" x="0px" y="0px" width="95.698997" height="52.632999" viewBox="0 0 95.698999 52.633" enable-background="new 0 0 566.93 566.93" xml:space="preserve" version="0.48.4 r9939" docname="bus.svg" class="svg replaced-svg"><metadata id="metadata15"><rdf:RDF><cc:Work about=""><dc:format>image/svg+xml</dc:format><dc:type resource="http://purl.org/dc/dcmitype/StillImage"></dc:type></cc:Work></rdf:RDF></metadata><defs id="defs13"></defs><sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" pageopacity="0" pageshadow="2" window-width="1855" window-height="1056" id="namedview11" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" zoom="0.41627715" cx="47.464999" cy="26.463" window-x="1665" window-y="24" window-maximized="1" current-layer="Ebene_1"></sodipodi:namedview>
+						<g fill="#fff"id="g3" transform="translate(-236,-257.295)">
+							<path d="m 312.561,276.435 v -14.354 c 7.928,0 14.354,6.427 14.354,14.354 h -14.354 z m 14.354,14.356 c 0,2.637 -2.147,4.785 -4.785,4.785 h -0.242 c -1.108,-5.461 -5.934,-9.57 -11.72,-9.57 -5.789,0 -10.613,4.109 -11.721,9.57 h -9.812 V 281.22 h 38.28 v 9.571 z m -16.747,14.354 c -3.958,0 -7.178,-3.219 -7.178,-7.178 0,-3.957 3.22,-7.176 7.178,-7.176 3.957,0 7.177,3.219 7.177,7.176 0,3.959 -3.22,7.178 -7.177,7.178 m -40.915,-9.569 c -1.108,-5.461 -5.934,-9.57 -11.72,-9.57 -5.789,0 -10.613,4.109 -11.721,9.57 h -0.242 c -2.638,0 -4.785,-2.148 -4.785,-4.785 v -9.571 h 43.065 v 14.356 h -14.597 z m -11.72,9.569 c -3.958,0 -7.178,-3.219 -7.178,-7.178 0,-3.957 3.22,-7.176 7.178,-7.176 3.957,0 7.177,3.219 7.177,7.176 0,3.959 -3.22,7.178 -7.177,7.178 m -16.748,-38.279 c 0,-2.639 2.147,-4.785 4.785,-4.785 h 14.355 v 14.354 h -19.14 v -9.569 z m 43.065,9.569 h -19.14 v -14.354 h 19.14 v 14.354 z m 23.925,0 h -19.141 v -14.354 h 19.141 v 14.354 z m 4.786,-19.14 H 245.57 c -5.285,0 -9.57,4.285 -9.57,9.57 v 23.925 c 0,5.285 4.285,9.568 9.57,9.568 h 0.242 c 1.108,5.459 5.932,9.57 11.721,9.57 5.786,0 10.612,-4.111 11.72,-9.57 h 29.194 c 1.107,5.459 5.932,9.57 11.721,9.57 5.786,0 10.611,-4.111 11.72,-9.57 h 0.242 c 5.285,0 9.569,-4.283 9.569,-9.568 v -14.356 c 0,-10.553 -8.586,-19.139 -19.138,-19.139" id="path5" connector-curvature="0"></path><path d="m 257.533,295.574 c -1.321,0 -2.392,1.072 -2.392,2.395 0,1.32 1.071,2.391 2.392,2.391 1.321,0 2.392,-1.07 2.392,-2.391 -0.001,-1.323 -1.071,-2.395 -2.392,-2.395" id="path7" connector-curvature="0"></path><path d="m 310.168,295.574 c -1.321,0 -2.393,1.072 -2.393,2.395 0,1.32 1.071,2.391 2.393,2.391 1.32,0 2.392,-1.07 2.392,-2.391 0,-1.323 -1.072,-2.395 -2.392,-2.395" id="path9" connector-curvature="0">
+							</path>
+							<animateTransform attributeType="XML" attributeName="transform" type="translate" from="-350,-257.295" to="-130,-257.295" dur="3s" repeatCount="indefinite"/>
+						</g>
+					</svg>
 					</div>
-					<div class="col-xs-9">
-					<svg width="75%" height="100">
-					  <circle cx="50" cy="50" r="18" stroke-width="4" fill="red" />
-                      		          <line x1="50" y1="50" x2="200" y2="50" style="stroke:rgb(255,0,0);stroke-width:6px" />
-					  <circle cx="500" cy="50" r="18" stroke="red" stroke-width="4" fill="white" />
-					  <circle cx="500" cy="50" r="18" stroke="red" stroke-width="4" fill="white" />
+					<div class="col-xs-9 drawn-route">
+					<svg width="100%" height="100%">
+					  <circle cx="18" cy="50%" r="18" stroke-width="4" fill="red" />
+                      		          <line x1="18" y1="50%" x2="95%" y2="50%" style="stroke:rgb(255,0,0);stroke-width:6px" />
+					  <circle cx="25%" cy="50%" r="18" stroke="red" stroke-width="4" fill="#fff" />
+					  <text x="20%" y="120" fill="#fff">Domenikaner Platz</text>
+					  <text x="20%" y="140" fill="#fff">Piazza domenicani</text>
+					  <circle cx="95%" cy="50%" r="24" stroke="red" stroke-width="12" fill="#000" />
+					  <text x="90%" y="130" fill="#fff">{{line.last_station}}</text>
 					</svg>
 					</div>
 				</div>	

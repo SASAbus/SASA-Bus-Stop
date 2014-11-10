@@ -1,6 +1,5 @@
 var busstop = angular.module('busstop', ['ngRoute','ngAnimate','ngSanitize']);
-busstop.config(['$routeProvider',
-  function($routeProvider) {
+busstop.config(function($routeProvider) {
     $routeProvider.
       when('/', {
         templateUrl: 'partials/bus.html',
@@ -13,7 +12,7 @@ busstop.config(['$routeProvider',
       otherwise({
         redirectTo: '/'
       });
-  }]);
+  });
 busstop.directive('myClock', ['$interval', 'dateFilter', function($interval, dateFilter) {
 
     function link(scope, element, attrs) {
@@ -38,11 +37,11 @@ busstop.directive('myClock', ['$interval', 'dateFilter', function($interval, dat
       link: link
     };
 }]);
-busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$routeParams,$timeout) {
+busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$routeParams,$timeout,$sce) {
 	var self= $scope;
 	var numberOfLines = 1000;
  	var lineId = 5029;
-	var scrollFactor=4;
+	var scrollFactor=8;
 	self.replaceSvg= function(){
     		jQuery('img.svg').each(function(){
 	        var $img = jQuery(this);
@@ -92,7 +91,8 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 	};
 	self.assembleNotes = function(data){
 		for (i in data){
-			data[i]['text']=data[i].titel_de+':&nbsp'+data[i].nachricht_de+'&nbsp;&nbsp;&nbsp;'+data[i].titel_it+':&nbsp '+data[i].nachricht_it;
+			var htmlString='<div>'+data[i].titel_de+':&nbsp'+data[i].nachricht_de+'&nbsp;&nbsp;&nbsp;'+data[i].titel_it+':&nbsp '+data[i].nachricht_it+'</div>';
+			data[i]['text']=$(htmlString).text();
 		}
 		return data;
 	}
@@ -129,8 +129,9 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 			if (delay!=null)
 				arrivalTime.add(data[i].delay,'minutes');
 			var comesIn = Math.round(arrivalTime.diff(now)/60/1000);
-			if (comesIn<1)
+			if (comesIn<=1){
 				comesIn=1;
+			}
 			data[i]['comesIn'] = comesIn;
 		}
 	}
@@ -170,6 +171,6 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 			self.moveNote(i);
    		}, scrollSpeed);   
 	};
-	$interval(self.refreshLines,20000);
+	$interval(self.refreshLines,2000);
 	$interval(self.refreshInfos,300000);
 });

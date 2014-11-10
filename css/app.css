@@ -63,7 +63,6 @@ h1{
 
 }
 .line{
-	//background-color:#111111;
 	background-color:#303030;
 	margin:0;
 	padding: 30px;
@@ -74,6 +73,9 @@ h1{
 }
 .line:nth-child(2n-1){
 	background-color:#000;
+}
+.line>div>*{
+	vertical-align:sub;
 }
 .line.ng-enter {
 	-webkit-transition:0.5s linear all;
@@ -91,10 +93,10 @@ h1{
     	left: 0;
 }
 .line.ng-leave {
-  -webkit-animation:0.8s my_animation;
-  -moz-animation:0.8s my_animation;
-  -o-animation:0.8s my_animation;
-  animation:0.8s my_animation;
+  -webkit-animation:0.8s my_animation linear;
+  -moz-animation:0.8s my_animation linear;
+  -o-animation:0.8s my_animation linear;
+  animation:0.8s my_animation linear;
 }
  
 @keyframes my_animation {
@@ -102,14 +104,12 @@ h1{
     max-height: 200px;
     opacity: 1;
     left: 0;
-    margin:35px 0;
     padding: 30px;
   }
   to {
     max-height: 0;
     opacity: 0;
     left: -1000px;
-    margin:0;
     padding: 0;
   }
 }
@@ -134,7 +134,7 @@ h1{
 }
 .footer{
 	color:#fff;
-	position:absolute;
+	position:fixed;
 	bottom:0;
 	width:100%;
 	z-index:500;
@@ -145,15 +145,8 @@ h1{
 }
 .notes{
 	position:absolute;
-	left:3500px;
-	white-space:nowrap;
-}
-.move-note{
-	left:-3500px;
-	-webkit-transition:20s linear all;
-        -moz-transition:20s linear all;
-        -o-transition:20s linear all;
-        transition:20s linear all;
+	left:2000px;
+	white-space:nowrap !important;
 }
 .clock{
 	font-size:80px;
@@ -188,5 +181,10 @@ h1{
 .stationname{
 	font-size:60px;
 	line-height:50px;
-
+	text-transform:uppercase;
+}
+.drawn-route{
+	font-size:18px;
+}
+.animated-bus{
 }

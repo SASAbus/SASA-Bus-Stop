@@ -187,4 +187,8 @@ h1{
 	font-size:18px;
 }
 .animated-bus{
+	-webkit-transition: opacity 300ms linear 1s;
+	-moz-transition: opacity 300ms linear 1s;
+	-o-transition: opacity 300ms linear 1s;
+	transition: opacity 300ms linear 1s;
 }

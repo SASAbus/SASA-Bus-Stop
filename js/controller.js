@@ -5,7 +5,7 @@ busstop.config(function($routeProvider) {
         templateUrl: 'partials/bus.html',
         controller: 'BusStopCtrl'
       }).
-      when('/:lineId', {
+      when('/:rideId', {
         templateUrl: 'partials/bus.html',
         controller: 'BusStopCtrl'
       }).
@@ -39,8 +39,8 @@ busstop.directive('myClock', ['$interval', 'dateFilter', function($interval, dat
 }]);
 busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$routeParams,$timeout,$sce) {
 	var self= $scope;
-	var numberOfLines = 1000;
- 	var lineId = 5029;
+	var numberOfRides = 1000;
+ 	var rideId = 5029;
 	var scrollFactor=8;
 	self.replaceSvg= function(){
     		jQuery('img.svg').each(function(){
@@ -71,21 +71,21 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
     
     	});
 	}
-	if ($routeParams.lineId != null)
-		lineId = $routeParams.lineId;
-	self.lines = new Array();
-	self.refreshLines = function(){
-		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+lineId+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
+	if ($routeParams.rideId != null)
+		rideId = $routeParams.rideId;
+	self.rides = new Array();
+	self.refreshRides = function(){
+		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
 			if (status != 200 || data == null || data.length===0){
 				self.warning=true;
 			}else{
-				console.log(data);
 				self.elaborateData(data);
 			}					
 		});
 	}
 	self.refreshInfos = function(){
 		$http.jsonp("http://www.sasabz.it/android/android_json.php?callback=JSON_CALLBACK").success(function(data, status, headers, config) {
+			self.notes = [];
 			self.notes = self.assembleNotes(data);
 		});
 	};
@@ -100,19 +100,19 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		self.moveNote();
    	});
 	self.elaborateData = function(data)	{
-		data=data.slice(0,numberOfLines);
+		data=data.slice(0,numberOfRides);
 		self.calcArrival(data);
-		if(self.lines.length===0)
-			self.lines=data;
+		if(self.rides.length===0)
+			self.rides=data;
 		else{
 			var now = moment();
-			var newLines = self.arr_diff(data,self.lines);
-			var departedLines = self.arr_diff(self.lines,data);
-			for(i in departedLines){
-				self.lines.splice(departedLines[i],1);
+			var newRides = self.arr_diff(data,self.rides);
+			var departedRides = self.arr_diff(self.rides,data);
+			for(i in departedRides){
+				self.rides.splice(departedRides[i],1);
 			}
-			for (i in newLines){
-				self.lines.push(data[newLines[i]]);
+			for (i in newRides){
+				self.rides.push(data[newRides[i]]);
 			}
 		}
 	}
@@ -171,6 +171,12 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 			self.moveNote(i);
    		}, scrollSpeed);   
 	};
-	$interval(self.refreshLines,2000);
-	$interval(self.refreshInfos,300000);
+	self.getGerman = function(text){
+		return text.substring(0,text.indexOf('-'));
+	}
+	self.getItalian = function(text){
+		return text.substring(text.indexOf('-')+1,text.length);
+	}
+	$interval(self.refreshRides,5000);
+	$interval(self.refreshInfos,1800000);
 });

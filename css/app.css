@@ -192,3 +192,6 @@ h1{
 	-o-transition: opacity 300ms linear 1s;
 	transition: opacity 300ms linear 1s;
 }
+svg g text tspan{
+	text-anchor:middle;
+}

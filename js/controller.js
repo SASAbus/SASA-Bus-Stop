@@ -84,7 +84,7 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		});
 	}
 	self.refreshInfos = function(){
-		$http.jsonp("http://www.sasabz.it/android/android_json.php?callback=JSON_CALLBACK").success(function(data, status, headers, config) {
+		$http.jsonp("http://www.sasabz.it/android/android_json.php?callback=JSON_CALLBACK&city=2").success(function(data, status, headers, config) {
 			self.notes = [];
 			self.notes = self.assembleNotes(data);
 		});
@@ -120,14 +120,14 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		var now = moment();
 		for (i in data){
 			var arrivalTime = moment();
-			var delay = data[i].delay;
+			var delay = data[i].delay_sec;
 			var arrivalString = data[i].arrival.toString();
 			if (arrivalString.length===4)
 				arrivalString = "0"+arrivalString;
 			arrivalTime.hour(arrivalString.substring(0,2));
 			arrivalTime.minute(arrivalString.substring(3,5));
 			if (delay!=null)
-				arrivalTime.add(data[i].delay,'minutes');
+				arrivalTime.add(delay,'seconds');
 			var comesIn = Math.round(arrivalTime.diff(now)/60/1000);
 			if (comesIn<=1){
 				comesIn=1;

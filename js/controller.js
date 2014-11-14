@@ -128,7 +128,7 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 			arrivalTime.minute(arrivalString.substring(3,5));
 			if (delay!=null)
 				arrivalTime.add(delay,'seconds');
-			var comesIn = Math.round(arrivalTime.diff(now)/60/1000);
+			var comesIn = Math.ceil(arrivalTime.diff(now)/60/1000);
 			if (comesIn<=1){
 				comesIn=1;
 			}

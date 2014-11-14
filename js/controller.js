@@ -122,7 +122,7 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		for (i in data){
 			var arrivalTime = moment();
 			var delay = data[i].delay_sec;
-			var arrivalString = data[i].departure.toString();
+			var arrivalString = data[i].arrival.toString();
 			if (arrivalString.length===4)
 				arrivalString = "0"+arrivalString;
 			arrivalTime.hour(arrivalString.substring(0,2));

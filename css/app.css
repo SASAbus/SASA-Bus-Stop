@@ -22,7 +22,7 @@
 	text-align:center;
 	margin-bottom:50px;
 	padding-bottom:5px;
-	border-bottom:1px solid #e4e4e4;	
+	border-bottom:1px solid #e4e4e4;
 }
 .partner img{
 	margin-bottom:40px;
@@ -37,7 +37,7 @@ body,html{
 	overflow:hidden;
 	height:100%;
 	text-align:center;
-	font-family: Arial,sans-serif !important;
+	font-family:"Helvetica Neue",Helvetica,Arial,sans-serif !important;
 }
 h1{
 	color:#00adef;
@@ -98,7 +98,7 @@ h1{
   -o-animation:0.8s my_animation linear;
   animation:0.8s my_animation linear;
 }
- 
+
 @keyframes my_animation {
   from {
     max-height: 200px;
@@ -113,7 +113,7 @@ h1{
     padding: 0;
   }
 }
- 
+
 /*
   Unfortunately each browser vendor requires
   its own definition of keyframe animation code...
@@ -159,7 +159,6 @@ h1{
 	text-align:center;
 	padding:20px 0;
 	height:145px;
-	
 }
 .headline svg{
 	fill:#fff;
@@ -169,7 +168,7 @@ h1{
 	left:0;
 	top:50%;
 	height:50%;
-} 
+}
 .marker>div{
 	width:25px;
 	height:100%;
@@ -179,9 +178,11 @@ h1{
 	position:relative;
 }
 .stationname{
+	position: relative;
+	top: 50%;
+	transform: translateY(-50%);
 	font-size:60px;
-	line-height:50px;
-	text-transform:uppercase;
+	line-height:60px;
 }
 .drawn-route{
 	font-size:18px;

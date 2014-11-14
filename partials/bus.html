@@ -1,7 +1,7 @@
 <header>
 <div class="container-fluid">
 	<div class="row headline" ng-init="replaceSvg()">
-		
+
 		<div class="col-xs-2">
 			<img src="img/bus.svg" class="svg">
 		</div>
@@ -11,17 +11,17 @@
 				<image xlink:href="../img/clock.svg" x="0" y="0" height="50px" width="50px" fill="#fff"/>
 			</svg>-->
 		</div>
-		<div class="col-xs-4 stationname">
+		<div class="col-xs-7 stationname">
 			{{rides[0].stationname}}
 		</div>
-		<div class="col-xs-2 col-sm-offset-3">
+		<div class="col-xs-2">
 			<div my-clock="HH:mm" class="clock"><!----></div>
 		</div>
-	</div> 
+	</div>
 </header>
 <div class="slideshow-container" ng-controller="BusStopCtrl">
 		<div ng-show="warning">System not working</div>
-		
+
 		<div class="content container-fluid" ng-init="refreshRides();">
 			<div class="lines">
 				<div ng-repeat="ride in rides | orderBy:'comesIn'" class="row line">
@@ -40,9 +40,9 @@
 					<div class="col-xs-9 drawn-route">
 					<svg width="100%" height="100%">
 					  <circle cx="18" cy="50%" r="18" stroke-width="4" fill="{{ride.hexcode}}" />
-					  	
+
                       		          <line x1="18" y1="50%" x2="90%" y2="50%" stroke="{{ride.hexcode}}" stroke-width="6px" />
-					  
+
 					   <g ng-repeat="stop in ride.passlist" ng-if="ride.passlist.length>=4 && $index<4">
 					   	<circle cx="{{($index+1)*20}}%" cy="50%" r="18" stroke="{{ride.hexcode}}" stroke-width="4" fill="#fff" />
 						<text fill="#fff">
@@ -64,7 +64,7 @@
 					  </text>
 					</svg>
 					</div>
-				</div>	
+				</div>
 			</div>
 		</div>
 		<!--<div class="partner">
@@ -80,5 +80,4 @@
 	<div ng-repeat="note in notes" class="notes" id="element{{$index}}">
                <div class="note"><span ng-bind-html="note.text"></span></div>
        </div>
-</div> 
-
+</div>

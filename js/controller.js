@@ -172,11 +172,23 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 			self.moveNote(i);
    		}, scrollSpeed);   
 	};
-	self.getGerman = function(text){
-		return text.substring(0,text.indexOf('-'));
+	self.getFirstPart = function(text){
+		var substr = text.substring(0,text.indexOf('-'));
+		if (substr.length<=0){
+			var alt= self.getSecondPart(text);
+			if (alt.length!=0)
+				substr = alt;
+		}
+		return substr;
 	}
-	self.getItalian = function(text){
-		return text.substring(text.indexOf('-')+1,text.length);
+	self.getSecondPart = function(text){
+		var substr = text.substring(text.indexOf('-')+1,text.length);
+		if (substr.length<=0){
+			var alt= self.getFirstPart(text);
+			if (alt.length!=0)
+				substr = alt;
+		}
+		return substr;
 	}
 	$interval(self.refreshRides,5000);
 	$interval(self.refreshInfos,1800000);

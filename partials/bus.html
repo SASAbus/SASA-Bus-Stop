@@ -12,8 +12,8 @@
 			</svg>-->
 		</div>
 		<div class="col-xs-7 stationname" style="text-align:left">
-			{{getGerman(stationname)}}<br/>
-			{{getItalian(stationname)}}
+			{{getFirstPart(stationname)}}<br/>
+			{{getSecondPart(stationname)}}
 		</div>
 		<div class="col-xs-2">
 			<div my-clock="HH:mm" class="clock"><!----></div>
@@ -47,21 +47,21 @@
 					   <g ng-repeat="stop in ride.passlist" ng-if="ride.passlist.length>=4 && $index<4">
 					   	<circle cx="{{($index+1)*20}}%" cy="50%" r="18" stroke="{{ride.hexcode}}" stroke-width="4" fill="#fff" />
 						<text fill="#fff">
-							<tspan x="{{(($index+1)*20)}}%" y="{{$index%2==0?120:15}}">{{getGerman(stop.ORT_NAME)}}</tspan>
-						  	<tspan x="{{(($index+1)*20)}}%" y="{{$index%2==0?140:35}}">{{getItalian(stop.ORT_NAME)}}</tspan>
+							<tspan x="{{(($index+1)*20)}}%" y="{{$index%2==0?120:15}}">{{getFirstPart(stop.ORT_NAME)}}</tspan>
+						  	<tspan x="{{(($index+1)*20)}}%" y="{{$index%2==0?140:35}}">{{getSecondPart(stop.ORT_NAME)}}</tspan>
 						</text>
 					  </g>
 					  <g ng-repeat="stop in ride.passlist" ng-if="ride.passlist.length<4">
 					   	<circle cx="{{($index+1)*30}}%" cy="50%" r="18" stroke="{{ride.hexcode}}" stroke-width="4" fill="#fff" />
 						<text fill="#fff">
-							<tspan x="{{(($index+1)*30)}}%" y="{{$index%2==0?120:15}}">{{getGerman(stop.ORT_NAME)}}</tspan>
-						  	<tspan x="{{(($index+1)*30)}}%" y="{{$index%2==0?140:35}}">{{getItalian(stop.ORT_NAME)}}</tspan>
+							<tspan x="{{(($index+1)*30)}}%" y="{{$index%2==0?120:15}}">{{getFirstPart(stop.ORT_NAME)}}</tspan>
+						  	<tspan x="{{(($index+1)*30)}}%" y="{{$index%2==0?140:35}}">{{getSecondPart(stop.ORT_NAME)}}</tspan>
 						</text>
 					  </g>
 					  <circle cx="90%" cy="50%" r="24" stroke="{{ride.hexcode}}" stroke-width="12" fill="#000" />
 					  <text fill="{{ride.hexcode}}">
-						<tspan x="90%" y="125">{{getGerman(ride.last_station)}}</tspan>
-					  	<tspan x="90%" y="145">{{getItalian(ride.last_station)}}</tspan>
+						<tspan x="90%" y="125">{{getFirstPart(ride.last_station)}}</tspan>
+					  	<tspan x="90%" y="145">{{getSecondPart(ride.last_station)}}</tspan>
 					  </text>
 					</svg>
 					</div>

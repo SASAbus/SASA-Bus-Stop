@@ -79,7 +79,8 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 			if (status != 200 || data == null || data.length===0){
 				self.warning=true;
 			}else{
-				self.elaborateData(data);
+				self.stationname=data.stationname;
+				self.elaborateData(data.rides);
 			}					
 		});
 	}

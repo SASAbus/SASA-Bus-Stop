@@ -11,8 +11,9 @@
 				<image xlink:href="../img/clock.svg" x="0" y="0" height="50px" width="50px" fill="#fff"/>
 			</svg>-->
 		</div>
-		<div class="col-xs-7 stationname">
-			{{rides[0].stationname}}
+		<div class="col-xs-7 stationname" style="text-align:left">
+			{{getGerman(stationname)}}<br/>
+			{{getItalian(stationname)}}
 		</div>
 		<div class="col-xs-2">
 			<div my-clock="HH:mm" class="clock"><!----></div>
@@ -20,7 +21,7 @@
 	</div>
 </header>
 <div class="slideshow-container" ng-controller="BusStopCtrl">
-		<div ng-show="warning">System not working</div>
+		<div ng-show="warning">Blame Markus!!!</div>
 
 		<div class="content container-fluid" ng-init="refreshRides();">
 			<div class="lines">

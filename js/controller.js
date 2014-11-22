@@ -173,6 +173,8 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
    		}, scrollSpeed);   
 	};
 	self.getFirstPart = function(text){
+		if (text == undefined)
+			return "";
 		var substr = text.substring(0,text.indexOf('-'));
 		if (substr.length<=0){
 			var alt= self.getSecondPart(text);
@@ -182,6 +184,8 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		return substr;
 	}
 	self.getSecondPart = function(text){
+		if (text == undefined)
+			return "";
 		var substr = text.substring(text.indexOf('-')+1,text.length);
 		if (substr.length<=0){
 			var alt= self.getFirstPart(text);

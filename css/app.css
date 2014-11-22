@@ -57,6 +57,11 @@ h1{
 	max-height: 0;
 	opacity: 0;
 	left: -1000px;
+	-webkit-transform: translate3d(0,0,0);
+	-moz-transform: translate3d(0,0,0);
+	-ms-transform: translate3d(0,0,0);
+	-o-transform: translate3d(0,0,0);
+	transform: translate3d(0,0,0);
 
 }
 .line.ng-enter.ng-enter-active {
@@ -65,10 +70,15 @@ h1{
     	left: 0;
 }
 .line.ng-leave {
-  -webkit-animation:0.8s my_animation linear;
-  -moz-animation:0.8s my_animation linear;
-  -o-animation:0.8s my_animation linear;
-  animation:0.8s my_animation linear;
+	-webkit-animation:0.8s my_animation linear;
+	-moz-animation:0.8s my_animation linear;
+ 	-o-animation:0.8s my_animation linear;
+  	animation:0.8s my_animation linear;
+	-webkit-transform: translate3d(0,0,0);
+  	-moz-transform: translate3d(0,0,0);
+  	-ms-transform: translate3d(0,0,0);
+  	-o-transform: translate3d(0,0,0);
+  	transform: translate3d(0,0,0);
 }
 
 @keyframes my_animation {
@@ -120,6 +130,13 @@ h1{
 	left:2000px;
 	white-space:nowrap !important;
 }
+[id^="element"]{
+	-webkit-transform:  translate3d(0,0,0);
+   	-moz-transform:  translate3d(0,0,0);
+   	-ms-transform:  translate3d(0,0,0);
+   	-o-transform:  translate3d(0,0,0);
+   	transform:  translate3d(0,0,0);
+}
 .clock{
 	font-size:80px;
 }
@@ -167,4 +184,11 @@ h1{
 }
 svg text tspan{
 	text-anchor:middle;
+}
+.hwacceleration{
+	-webkit-transform:  translate3d(0,0,0);
+   	-moz-transform:  translate3d(0,0,0);
+   	-ms-transform:  translate3d(0,0,0);
+   	-o-transform:  translate3d(0,0,0);
+   	transform:  translate3d(0,0,0);
 }

@@ -168,8 +168,6 @@ h1{
 }
 .stationname{
 	position: relative;
-	top: 50%;
-	transform: translateY(-50%);
 	font-size:60px;
 	line-height:60px;
 }

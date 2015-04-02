@@ -70,7 +70,7 @@
 		</div>
 </div>
 <div class="footer" ng-init="refreshInfos();">
-	<div ng-repeat="note in notes" class="notes" id="element{{$index}}">
-               <div class="note hwacceleration"><span ng-bind-html="note.text"></span></div>
+	<div ng-repeat="note in notes" class="notes hwacceleration" id="element{{$index}}">
+               <div class="note hwacceleration"><span class="hwacceleration" ng-bind-html="note.text"></span></div>
        </div>
 </div>

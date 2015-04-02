@@ -196,5 +196,4 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		return substr;
 	}
 	$interval(self.refreshRides,5000);
-	$interval(self.refreshInfos,1800000);
 });

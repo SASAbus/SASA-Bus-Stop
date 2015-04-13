@@ -1,3 +1,4 @@
+<div ng-controller="BusStopCtrl" ng-init="initRides();refreshRides();">
 <header>
 <div class="container-fluid">
 	<div class="row headline" ng-init="replaceSvg()">
@@ -11,19 +12,19 @@
 				<image xlink:href="../img/clock.svg" x="0" y="0" height="50px" width="50px" fill="#fff"/>
 			</svg>-->
 		</div>
-		<div class="col-xs-7 stationname" style="text-align:left">
-			{{getFirstPart(stationname)}}<br/>
-			{{getSecondPart(stationname)}}
+		<div class="col-xs-7 stationname" style="text-align:left" ng-init ="getFirstPart()">
+			<span>{{german_stationname}}</span><br/>
+			<span>{{italian_stationname}}</span>
 		</div>
 		<div class="col-xs-2">
 			<div my-clock="HH:mm" class="clock"><!----></div>
 		</div>
 	</div>
 </header>
-<div class="slideshow-container" ng-controller="BusStopCtrl">
-		<div ng-show="warning">Blame Markus!!!</div>
+<div class="slideshow-container">
+		<div ng-show="warning">Site under mantainance!!!</div>
 
-		<div class="content container-fluid" ng-init="refreshRides();">
+		<div class="content container-fluid">
 			<div class="lines">
 				<div ng-repeat="ride in rides | orderBy:'comesIn'" class="row line">
 					<div class="marker"><div style="background-color: {{ride.hexcode}}"></div></div>
@@ -60,8 +61,8 @@
 					  </g>
 					  <circle cx="90%" cy="50%" r="24" stroke="{{ride.hexcode}}" stroke-width="12" fill="#000" />
 					  <text fill="{{ride.hexcode}}">
-						<tspan x="90%" y="125">{{getFirstPart(ride.last_station)}}</tspan>
-					  	<tspan x="90%" y="145">{{getSecondPart(ride.last_station)}}</tspan>
+						<tspan x="90%" y="120">{{getFirstPart(ride.last_station)}}</tspan>
+					  	<tspan x="90%" y="140">{{getSecondPart(ride.last_station)}}</tspan>
 					  </text>
 					</svg>
 					</div>
@@ -74,4 +75,5 @@
 	<div ng-repeat="note in notes" class="notes hwacceleration" id="element{{$index}}">
                <div class="note hwacceleration"><span class="hwacceleration" ng-bind-html="note.text"></span></div>
        </div>
+</div>
 </div>

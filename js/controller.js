@@ -40,7 +40,7 @@ busstop.directive('myClock', ['$interval', 'dateFilter', function($interval, dat
 }]);
 busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$routeParams,$timeout,$sce) {
 	var self= $scope;
-	var numberOfRides = 1000;
+	var numberOfRides = 50;
  	var rideId = 5029;
 	var scrollFactor=8;
 	self.replaceSvg= function(){
@@ -76,14 +76,28 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		rideId = $routeParams.rideId;
 	self.rides = new Array();
 	self.refreshRides = function(){
+		$interval(function(){
 		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
 			if (status != 200 || data == null || data.length===0){
 				self.warning=true;
 			}else{
-				self.stationname=data.stationname;
+				self.german_stationname=self.getFirstPart(data.stationname);
+				self.italian_stationname=self.getSecondPart(data.stationname);
 				self.elaborateData(data.rides);
 			}					
 		});
+		},10000);
+	}
+	self.initRides = function(){
+		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
+                        if (status != 200 || data == null || data.length===0){
+                                self.warning=true;
+                        }else{
+				self.german_stationname=self.getFirstPart(data.stationname);
+				self.italian_stationname=self.getSecondPart(data.stationname);
+                                self.elaborateData(data.rides);
+                        }    
+                });
 	}
 	self.refreshInfos = function(){
 		$http.jsonp("http://www.sasabz.it/android/android_json.php?callback=JSON_CALLBACK&city=2").success(function(data, status, headers, config) {
@@ -98,9 +112,6 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		}
 		return data;
 	}
-	self.$watch('notes', function() {
-		self.moveNote();
-   	});
 	self.elaborateData = function(data)	{
 		data=data.slice(0,numberOfRides);
 		self.calcArrival(data);
@@ -152,27 +163,6 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		}
 		return array;
 	}
-	
-	self.moveNote = function(i){
-		if ( i==undefined || self.notes==undefined || i> self.notes.length){
-			i=0;
-		}
-		var element = angular.element("#element"+i); 
-		var deviceWidth = $( document ).width();
-		var elementWidth = element.width();
-		var scrollSpeed = Math.floor(elementWidth*scrollFactor);
-		var googleEffect = '@-webkit-keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}';
-		var effect = '@keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}'+googleEffect;
-		var googleScroll  = '#element'+i+ '{-webkit-animation: element' +i+ ' ' +scrollSpeed+'ms linear;}';
-		var scroll  = '#element'+i+ '{animation: element' +i+ ' ' +scrollSpeed+'ms linear;}'+googleScroll;
-		i++;
-		
-		$('head').find('#animationStyles').remove();
-                $('head').append('<style id="animationStyles" type="text/css">' + effect +scroll+ '</style>');
-		$timeout(function() {
-			self.moveNote(i);
-   		}, scrollSpeed);   
-	};
 	self.getFirstPart = function(text){
 		if (text == undefined)
 			return "";
@@ -195,5 +185,25 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		}
 		return substr;
 	}
-	$interval(self.refreshRides,5000);
+	/*
+	self.moveNote = function(i){
+		if ( i==undefined || self.notes==undefined || i> self.notes.length){
+			i=0;
+		}
+		var element = angular.element("#element"+i); 
+		var deviceWidth = $( document ).width();
+		var elementWidth = element.width();
+		var scrollSpeed = Math.floor(elementWidth*scrollFactor);
+		var googleEffect = '@-webkit-keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}';
+		var effect = '@keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}'+googleEffect;
+		var googleScroll  = '#element'+i+ '{-webkit-animation: element' +i+ ' ' +scrollSpeed+'ms linear;}';
+		var scroll  = '#element'+i+ '{animation: element' +i+ ' ' +scrollSpeed+'ms linear;}'+googleScroll;
+		i++;
+		
+		$('head').find('#animationStyles').remove();
+                $('head').append('<style id="animationStyles" type="text/css">' + effect +scroll+ '</style>');
+		$timeout(function() {
+			self.moveNote(i);
+   		}, scrollSpeed);   
+	};*/
 });

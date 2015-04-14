@@ -8,8 +8,12 @@
 body,html{
 	overflow:hidden;
 	height:100%;
+	width:100%;
 	text-align:center;
 	font-family:Arial,sans-serif !important;
+}
+body>div{
+	width:100%;
 }
 h1{
 	color:#00adef;
@@ -168,8 +172,9 @@ h1{
 }
 .stationname{
 	position: relative;
-	font-size:60px;
+	font-size:50px;
 	line-height:60px;
+	text-align:left;
 }
 .drawn-route{
 	font-size:18px;

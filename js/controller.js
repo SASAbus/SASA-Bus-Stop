@@ -40,9 +40,13 @@ busstop.directive('myClock', ['$interval', 'dateFilter', function($interval, dat
 }]);
 busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$routeParams,$timeout,$sce) {
 	var self= $scope;
-	var numberOfRides = 50;
- 	var rideId = 5029;
-	var scrollFactor=8;
+	var numberOfRides = 15;			// max number of rides to display
+ 	var rideId = 5029;  			//id of the busstop (e.g. id 1 = trainstation Merano)
+	var scrollFactor=8; 			//bigger is slower(decimal can be used)
+	var ridesUpdateIntervall = 10000;	// time in milliseconds
+	var infosUpdateIntervall = 108000000;	// time in milliseconds
+
+
 	self.replaceSvg= function(){
     		jQuery('img.svg').each(function(){
 	        var $img = jQuery(this);
@@ -77,7 +81,7 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 	self.rides = new Array();
 	self.refreshRides = function(){
 		$interval(function(){
-		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
+		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&LINES="+numberOfRides+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
 			if (status != 200 || data == null || data.length===0){
 				self.warning=true;
 			}else{
@@ -86,10 +90,10 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 				self.elaborateData(data.rides);
 			}					
 		});
-		},10000);
+		},ridesUpdateIntervall);
 	}
 	self.initRides = function(){
-		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
+		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&LINES="+numberOfRides+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
                         if (status != 200 || data == null || data.length===0){
                                 self.warning=true;
                         }else{
@@ -103,6 +107,7 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		$http.jsonp("http://www.sasabz.it/android/android_json.php?callback=JSON_CALLBACK&city=2").success(function(data, status, headers, config) {
 			self.notes = [];
 			self.notes = self.assembleNotes(data);
+			self.moveNote();
 		});
 	};
 	self.assembleNotes = function(data){
@@ -185,7 +190,7 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		}
 		return substr;
 	}
-	/*
+	
 	self.moveNote = function(i){
 		if ( i==undefined || self.notes==undefined || i> self.notes.length){
 			i=0;
@@ -205,5 +210,5 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		$timeout(function() {
 			self.moveNote(i);
    		}, scrollSpeed);   
-	};*/
+	};
 });

@@ -47,19 +47,19 @@
 
 					   <g ng-repeat="stop in ride.passlist" ng-if="ride.passlist.length>=4 && $index<4">
 					   	<circle ng-attr-cx="{{($index+1)*20}}%" cy="50%" r="18" stroke="{{ride.hexcode}}" stroke-width="4" fill="#fff" />
-						<text fill="#fff">
+						<text fill="#000">
 							<tspan ng-attr-x="{{(($index+1)*20)}}%" ng-attr-y="{{$index%2==0?120:15}}">{{getFirstPart(stop.ORT_NAME)}}</tspan>
 						  	<tspan ng-attr-x="{{(($index+1)*20)}}%" ng-attr-y="{{$index%2==0?140:35}}">{{getSecondPart(stop.ORT_NAME)}}</tspan>
 						</text>
 					  </g>
 					  <g ng-repeat="stop in ride.passlist" ng-if="ride.passlist.length<4">
 					   	<circle ng-attr-cx="{{($index+1)*30}}%" cy="50%" r="18" stroke="{{ride.hexcode}}" stroke-width="4" fill="#fff" />
-						<text fill="#fff">
+						<text fill="#000">
 							<tspan ng-attr-x="{{(($index+1)*30)}}%" ng-attr-y="{{$index%2==0?120:15}}">{{getFirstPart(stop.ORT_NAME)}}</tspan>
 						  	<tspan ng-attr-x="{{(($index+1)*30)}}%" ng-attr-y="{{$index%2==0?140:35}}">{{getSecondPart(stop.ORT_NAME)}}</tspan>
 						</text>
 					  </g>
-					  <circle cx="90%" cy="50%" r="24" stroke="{{ride.hexcode}}" stroke-width="12" fill="#000" />
+					  <circle cx="90%" cy="50%" r="24" stroke="{{ride.hexcode}}" stroke-width="12" fill="#fff" />
 					  <text fill="{{ride.hexcode}}">
 						<tspan x="90%" y="125">{{getFirstPart(ride.last_station)}}</tspan>
 					  	<tspan x="90%" y="145">{{getSecondPart(ride.last_station)}}</tspan>

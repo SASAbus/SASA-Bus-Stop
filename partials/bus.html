@@ -28,7 +28,7 @@
 			<div class="lines">
 				<div ng-repeat="ride in rides | orderBy:'comesIn'" class="row line">
 					<div class="marker"><div style="background-color: {{ride.hexcode}}"></div></div>
-					<div class="col-xs-2"><strong>{{ride.lidname}}</strong></div>
+					<div class="col-xs-2"><strong>{{ride.lidname|linename}}</strong></div>
 					<div class="col-xs-1">
 						<strong ng-hide="ride.comesIn<=1">{{ride.comesIn}}'</strong>
 						<svg ng-show="ride.comesIn<=1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" version="1.1"  x="0px" y="0px" width="95.698997" height="52.632999" viewBox="0 0 95.698999 52.633" enable-background="new 0 0 566.93 566.93" xml:space="preserve" version="0.48.4 r9939"><metadata id="metadata15"><rdf:RDF><cc:Work about=""><dc:format>image/svg+xml</dc:format><dc:type resource="http://purl.org/dc/dcmitype/StillImage"></dc:type></cc:Work></rdf:RDF></metadata><defs id="defs13"></defs><sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" pageopacity="0" pageshadow="2" window-width="1855" window-height="1056" id="namedview11" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" zoom="0.41627715" cx="47.464999" cy="26.463" window-x="1665" window-y="24" window-maximized="1" current-layer="Ebene_1"></sodipodi:namedview>

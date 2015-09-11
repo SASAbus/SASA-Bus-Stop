@@ -38,6 +38,11 @@ busstop.directive('myClock', ['$interval', 'dateFilter', function($interval, dat
       link: link
     };
 }]);
+busstop.filter('linename', function() {
+  return function(input) {
+    return input.replace("Linea","").replace("BZ","").replace("ME","").replace("ex L. 4","").replace("ex L. 2","");
+  };
+});
 busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$routeParams,$timeout,$sce) {
 	var self= $scope;
 	var numberOfRides = 15;			// max number of rides to display

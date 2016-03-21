@@ -49,7 +49,7 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
  	var rideId = 5029;  			//id of the busstop (e.g. id 1 = trainstation Merano)
 	var scrollFactor=8; 			//bigger is slower(decimal can be used)
 	var ridesUpdateIntervall = 10000;	// time in milliseconds
-	var infosUpdateIntervall = 108000000;	// time in milliseconds
+	var infosUpdateIntervall = 12*60*60*1000;	// time in milliseconds
 
 
 	self.replaceSvg= function(){
@@ -86,15 +86,15 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 	self.rides = new Array();
 	self.refreshRides = function(){
 		$interval(function(){
-		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&LINES="+numberOfRides+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
-			if (status != 200 || data == null || data.length===0){
-				self.warning=true;
-			}else{
-				self.german_stationname=self.getFirstPart(data.stationname);
-				self.italian_stationname=self.getSecondPart(data.stationname);
-				self.elaborateData(data.rides);
-			}					
-		});
+			$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&LINES="+numberOfRides+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
+				if (status != 200 || data == null || data.length===0){
+					self.warning=true;
+				}else{
+					self.german_stationname=self.getFirstPart(data.stationname);
+					self.italian_stationname=self.getSecondPart(data.stationname);
+					self.elaborateData(data.rides);
+				}					
+			});
 		},ridesUpdateIntervall);
 	}
 	self.initRides = function(){
@@ -108,12 +108,20 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
                         }    
                 });
 	}
+	self.initInfos = function(){
+		self.refreshInfos();
+		self.loopInfos();
+	}
 	self.refreshInfos = function(){
 		$http.jsonp("http://www.sasabz.it/android/android_json.php?callback=JSON_CALLBACK&city=2").success(function(data, status, headers, config) {
 			self.notes = [];
+			$(".notes").empty();
 			self.notes = self.assembleNotes(data);
 			self.moveNote();
 		});
+	};
+	self.loopInfos = function(){
+		$interval(self.refreshInfos,infosUpdateIntervall);
 	};
 	self.assembleNotes = function(data){
 		for (i in data){

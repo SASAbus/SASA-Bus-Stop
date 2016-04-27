@@ -1,4 +1,3 @@
-
 var busstop = angular.module('busstop', ['ngRoute','ngAnimate','ngSanitize']);
 busstop.config(function($routeProvider) {
     $routeProvider.
@@ -111,24 +110,23 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 	self.initInfos = function(){
 		self.refreshInfos();
 		self.loopInfos();
+		self.moveNote();
 	}
 	self.refreshInfos = function(){
 		$http.jsonp("http://www.sasabz.it/android/android_json.php?callback=JSON_CALLBACK&city=2").success(function(data, status, headers, config) {
-			self.notes = [];
-			$(".notes").empty();
-			self.notes = self.assembleNotes(data);
-			self.moveNote();
+			self.assembleNotes(data);
 		});
 	};
 	self.loopInfos = function(){
 		$interval(self.refreshInfos,infosUpdateIntervall);
 	};
 	self.assembleNotes = function(data){
+		self.notes=[];
 		for (i in data){
 			var htmlString='<div>'+data[i].titel_de+':&nbsp'+data[i].nachricht_de+'&nbsp;&nbsp;&nbsp;'+data[i].titel_it+':&nbsp '+data[i].nachricht_it+'</div>';
 			data[i]['text']=$(htmlString).text();
+			self.notes.push(data[i]);
 		}
-		return data;
 	}
 	self.elaborateData = function(data)	{
 		data=data.slice(0,numberOfRides);
@@ -205,7 +203,7 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 	}
 	
 	self.moveNote = function(i){
-		if ( i==undefined || self.notes==undefined || i> self.notes.length){
+		if ( i==undefined || self.notes==undefined || i>= self.notes.length){
 			i=0;
 		}
 		var element = angular.element("#element"+i); 
@@ -217,11 +215,10 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		var googleScroll  = '#element'+i+ '{-webkit-animation: element' +i+ ' ' +scrollSpeed+'ms linear;}';
 		var scroll  = '#element'+i+ '{animation: element' +i+ ' ' +scrollSpeed+'ms linear;}'+googleScroll;
 		i++;
-		
 		$('head').find('#animationStyles').remove();
                 $('head').append('<style id="animationStyles" type="text/css">' + effect +scroll+ '</style>');
-		$timeout(function() {
+		var noteTimeout = $timeout(function() {
 			self.moveNote(i);
    		}, scrollSpeed);   
-	};
+	}
 });

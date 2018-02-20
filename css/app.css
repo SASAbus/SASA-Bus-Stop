@@ -3,13 +3,17 @@
 	height:100%;
 }
 .content{
-	background-color:#111111;
+//	background-color:#111111;
 }
 body,html{
 	overflow:hidden;
 	height:100%;
+	width:100%;
 	text-align:center;
 	font-family:Arial,sans-serif !important;
+}
+body>div{
+	width:100%;
 }
 h1{
 	color:#00adef;
@@ -31,20 +35,20 @@ h1{
 	line-height:30px;
 }
 .lines{
-	color:#fff;
+	color:#000;
 
 }
 .line{
-	background-color:#303030;
+	background-color:whitesmoke;
 	margin:0;
-	padding: 30px 0;
+	padding: 20px 0;
 	font-size:80px;
 	position:relative;
 	display:block;
 	height:200px;
 }
 .line:nth-child(2n-1){
-	background-color:#000;
+	background-color:#fff;
 }
 .line>div>*{
 	vertical-align:sub;
@@ -115,12 +119,12 @@ h1{
   }
 }
 .footer{
-	color:#fff;
+	color:#000;
 	position:fixed;
 	bottom:0;
 	width:100%;
 	z-index:500;
-	background-color:#000;
+	background-color:#fff;
 	height:122px;
 	line-height:122px;
 	font-size:60px;
@@ -142,15 +146,15 @@ h1{
 }
 .headline{
 	font-size:80px;
-	background-color:#000;
-	color:#fff;
-	border-bottom:2px solid #fff;
+	background-color:#fff;
+	color:#000;
+	border-bottom:2px solid #000;
 	text-align:center;
 	padding:20px 0;
 	height:145px;
 }
 .headline svg{
-	fill:#fff;
+	fill:#000;
 }
 .marker{
 	position:absolute;
@@ -161,15 +165,16 @@ h1{
 .marker>div{
 	width:25px;
 	height:100%;
-	background-color:#fff;
+	background-color:#000;
 	top:-50%;
 	display:block;
 	position:relative;
 }
 .stationname{
 	position: relative;
-	font-size:60px;
+	font-size:50px;
 	line-height:60px;
+	text-align:left;
 }
 .drawn-route{
 	font-size:18px;

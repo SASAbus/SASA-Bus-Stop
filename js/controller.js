@@ -1,4 +1,3 @@
-
 var busstop = angular.module('busstop', ['ngRoute','ngAnimate','ngSanitize']);
 busstop.config(function($routeProvider) {
     $routeProvider.
@@ -38,11 +37,20 @@ busstop.directive('myClock', ['$interval', 'dateFilter', function($interval, dat
       link: link
     };
 }]);
+busstop.filter('linename', function() {
+  return function(input) {
+    return input.replace("Linea","").replace("BZ","").replace("ME","").replace("ex L. 4","").replace("ex L. 2","");
+  };
+});
 busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$routeParams,$timeout,$sce) {
 	var self= $scope;
-	var numberOfRides = 1000;
- 	var rideId = 5029;
-	var scrollFactor=8;
+	var numberOfRides = 15;			// max number of rides to display
+ 	var rideId = 5029;  			//id of the busstop (e.g. id 1 = trainstation Merano)
+	var scrollFactor=8; 			//bigger is slower(decimal can be used)
+	var ridesUpdateIntervall = 10000;	// time in milliseconds
+	var infosUpdateIntervall = 12*60*60*1000;	// time in milliseconds
+
+
 	self.replaceSvg= function(){
     		jQuery('img.svg').each(function(){
 	        var $img = jQuery(this);
@@ -76,31 +84,50 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		rideId = $routeParams.rideId;
 	self.rides = new Array();
 	self.refreshRides = function(){
-		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
-			if (status != 200 || data == null || data.length===0){
-				self.warning=true;
-			}else{
-				self.stationname=data.stationname;
-				self.elaborateData(data.rides);
-			}					
-		});
+		$interval(function(){
+			$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&LINES="+numberOfRides+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
+				if (status != 200 || data == null || data.length===0){
+					self.warning=true;
+				}else{
+					self.german_stationname=self.getFirstPart(data.stationname);
+					self.italian_stationname=self.getSecondPart(data.stationname);
+					self.elaborateData(data.rides);
+				}					
+			});
+		},ridesUpdateIntervall);
+	}
+	self.initRides = function(){
+		$http.jsonp("http://stationboard.opensasa.info/?ORT_NR="+rideId+"&LINES="+numberOfRides+"&type=jsonp&jsonp=JSON_CALLBACK").success(function(data, status, headers, config) {
+                        if (status != 200 || data == null || data.length===0){
+                                self.warning=true;
+                        }else{
+				self.german_stationname=self.getFirstPart(data.stationname);
+				self.italian_stationname=self.getSecondPart(data.stationname);
+                                self.elaborateData(data.rides);
+                        }    
+                });
+	}
+	self.initInfos = function(){
+		self.refreshInfos();
+		self.loopInfos();
+		self.moveNote();
 	}
 	self.refreshInfos = function(){
 		$http.jsonp("http://www.sasabz.it/android/android_json.php?callback=JSON_CALLBACK&city=2").success(function(data, status, headers, config) {
-			self.notes = [];
-			self.notes = self.assembleNotes(data);
+			self.assembleNotes(data);
 		});
 	};
+	self.loopInfos = function(){
+		$interval(self.refreshInfos,infosUpdateIntervall);
+	};
 	self.assembleNotes = function(data){
+		self.notes=[];
 		for (i in data){
 			var htmlString='<div>'+data[i].titel_de+':&nbsp'+data[i].nachricht_de+'&nbsp;&nbsp;&nbsp;'+data[i].titel_it+':&nbsp '+data[i].nachricht_it+'</div>';
 			data[i]['text']=$(htmlString).text();
+			self.notes.push(data[i]);
 		}
-		return data;
 	}
-	self.$watch('notes', function() {
-		self.moveNote();
-   	});
 	self.elaborateData = function(data)	{
 		data=data.slice(0,numberOfRides);
 		self.calcArrival(data);
@@ -152,27 +179,6 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		}
 		return array;
 	}
-	
-	self.moveNote = function(i){
-		if ( i==undefined || self.notes==undefined || i> self.notes.length){
-			i=0;
-		}
-		var element = angular.element("#element"+i); 
-		var deviceWidth = $( document ).width();
-		var elementWidth = element.width();
-		var scrollSpeed = Math.floor(elementWidth*scrollFactor);
-		var googleEffect = '@-webkit-keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}';
-		var effect = '@keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}'+googleEffect;
-		var googleScroll  = '#element'+i+ '{-webkit-animation: element' +i+ ' ' +scrollSpeed+'ms linear;}';
-		var scroll  = '#element'+i+ '{animation: element' +i+ ' ' +scrollSpeed+'ms linear;}'+googleScroll;
-		i++;
-		
-		$('head').find('#animationStyles').remove();
-                $('head').append('<style id="animationStyles" type="text/css">' + effect +scroll+ '</style>');
-		$timeout(function() {
-			self.moveNote(i);
-   		}, scrollSpeed);   
-	};
 	self.getFirstPart = function(text){
 		if (text == undefined)
 			return "";
@@ -195,6 +201,24 @@ busstop.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$r
 		}
 		return substr;
 	}
-	$interval(self.refreshRides,5000);
-	$interval(self.refreshInfos,1800000);
+	
+	self.moveNote = function(i){
+		if ( i==undefined || self.notes==undefined || i>= self.notes.length){
+			i=0;
+		}
+		var element = angular.element("#element"+i); 
+		var deviceWidth = $( document ).width();
+		var elementWidth = element.width();
+		var scrollSpeed = Math.floor(elementWidth*scrollFactor);
+		var googleEffect = '@-webkit-keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}';
+		var effect = '@keyframes element' +i+ ' {0% { left:'+deviceWidth+';} 100% { left: -' + (elementWidth + 100) + 'px; top:0px;}}'+googleEffect;
+		var googleScroll  = '#element'+i+ '{-webkit-animation: element' +i+ ' ' +scrollSpeed+'ms linear;}';
+		var scroll  = '#element'+i+ '{animation: element' +i+ ' ' +scrollSpeed+'ms linear;}'+googleScroll;
+		i++;
+		$('head').find('#animationStyles').remove();
+                $('head').append('<style id="animationStyles" type="text/css">' + effect +scroll+ '</style>');
+		var noteTimeout = $timeout(function() {
+			self.moveNote(i);
+   		}, scrollSpeed);   
+	}
 });

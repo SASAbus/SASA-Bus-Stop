@@ -34,25 +34,25 @@ h1{
 	width:400px;
 	line-height:30px;
 }
-.lines{
-	color:#000;
-
-}
 .line{
 	background-color:whitesmoke;
 	margin:0;
 	padding: 20px 0;
-	font-size:80px;
+	font-size:40px;
 	position:relative;
 	display:block;
 	height:200px;
 }
+.line>div{
+	    height: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+}
 .line:nth-child(2n-1){
 	background-color:#fff;
 }
-.line>div>*{
-	vertical-align:sub;
-}
+
 .line.ng-enter {
 	-webkit-transition:0.5s linear all;
 	-moz-transition:0.5s linear all;
@@ -147,7 +147,6 @@ h1{
 .headline{
 	font-size:80px;
 	background-color:#fff;
-	color:#000;
 	border-bottom:2px solid #000;
 	text-align:center;
 	padding:20px 0;
@@ -160,12 +159,12 @@ h1{
 	position:absolute;
 	left:0;
 	top:50%;
-	height:50%;
+	height:50% !important;
 }
 .marker>div{
 	width:25px;
 	height:100%;
-	background-color:#000;
+	background-color:#333;
 	top:-50%;
 	display:block;
 	position:relative;
@@ -196,4 +195,7 @@ svg text tspan{
    	transform:  translate3d(0,0,0);
 	-webkit-backface-visibility: hidden;
 	-webkit-perspective: 1000;
+}
+.subtitle{
+	font-size: 0.4em;
 }

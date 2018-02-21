@@ -1,79 +1,61 @@
 <div ng-controller="BusStopCtrl" ng-init="initRides();refreshRides();" style="width:100%">
-<header>
-<div class="container-fluid">
-	<div class="row headline" ng-init="replaceSvg()">
+	<header>
+		<div class="container-fluid">
+			<div class="row headline" ng-init="replaceSvg()">
 
-		<div class="col-xs-2">
-			<img src="img/bus.svg" class="svg">
+				<div class="col-xs-1 col-xs-offset-1">
+					<span class="glyphicon glyphicon-time"></span>
+			</div>
+			<div class="col-xs-1 col-xs-offset-2">
+				<span class="glyphicon glyphicon-map-marker"></span>
+			</div>
+			<div class="col-xs-2 col-xs-offset-4">
+				<div my-clock="HH:mm" class="clock"><!----></div>
+			</div>
 		</div>
-		<div class="col-xs-1">
-			<img src="img/clock.svg" class="svg" />
-			<!--<svg width="5cm" height="4cm" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink= "http://www.w3.org/1999/xlink">
-				<image xlink:href="../img/clock.svg" x="0" y="0" height="50px" width="50px" fill="#fff"/>
-			</svg>-->
-		</div>
-		<div class="col-xs-7 stationname" ng-init ="getFirstPart()">
-			<span>{{german_stationname}}</span><br/>
-			<span>{{italian_stationname}}</span>
-		</div>
-		<div class="col-xs-2">
-			<div my-clock="HH:mm" class="clock"><!----></div>
-		</div>
-	</div>
-</header>
-<div class="slideshow-container">
+	</header>
+	<div class="slideshow-container">
 		<div ng-show="warning">Site under mantainance!!!</div>
-
 		<div class="content container-fluid">
 			<div class="lines">
-				<div ng-repeat="ride in rides | orderBy:'comesIn'" class="row line">
+				<div ng-repeat="ride in rides | orderBy:'from'" class="row line">
 					<div class="marker"><div style="background-color: {{ride.hexcode}}"></div></div>
-					<div class="col-xs-2"><strong>{{ride.lidname|linename}}</strong></div>
-					<div class="col-xs-1">
-						<strong ng-hide="ride.comesIn<=1">{{ride.comesIn}}'</strong>
-						<svg ng-show="ride.comesIn<=1" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:svg="http://www.w3.org/2000/svg" xmlns="http://www.w3.org/2000/svg" xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd" version="1.1"  x="0px" y="0px" width="95.698997" height="52.632999" viewBox="0 0 95.698999 52.633" enable-background="new 0 0 566.93 566.93" xml:space="preserve" version="0.48.4 r9939"><metadata id="metadata15"><rdf:RDF><cc:Work about=""><dc:format>image/svg+xml</dc:format><dc:type resource="http://purl.org/dc/dcmitype/StillImage"></dc:type></cc:Work></rdf:RDF></metadata><defs id="defs13"></defs><sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" pageopacity="0" pageshadow="2" window-width="1855" window-height="1056" id="namedview11" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" zoom="0.41627715" cx="47.464999" cy="26.463" window-x="1665" window-y="24" window-maximized="1" current-layer="Ebene_1"></sodipodi:namedview>
-						<g fill="{{ride.hexcode}}" transform="translate(-236,-257.295)">
-							<path d="m 312.561,276.435 v -14.354 c 7.928,0 14.354,6.427 14.354,14.354 h -14.354 z m 14.354,14.356 c 0,2.637 -2.147,4.785 -4.785,4.785 h -0.242 c -1.108,-5.461 -5.934,-9.57 -11.72,-9.57 -5.789,0 -10.613,4.109 -11.721,9.57 h -9.812 V 281.22 h 38.28 v 9.571 z m -16.747,14.354 c -3.958,0 -7.178,-3.219 -7.178,-7.178 0,-3.957 3.22,-7.176 7.178,-7.176 3.957,0 7.177,3.219 7.177,7.176 0,3.959 -3.22,7.178 -7.177,7.178 m -40.915,-9.569 c -1.108,-5.461 -5.934,-9.57 -11.72,-9.57 -5.789,0 -10.613,4.109 -11.721,9.57 h -0.242 c -2.638,0 -4.785,-2.148 -4.785,-4.785 v -9.571 h 43.065 v 14.356 h -14.597 z m -11.72,9.569 c -3.958,0 -7.178,-3.219 -7.178,-7.178 0,-3.957 3.22,-7.176 7.178,-7.176 3.957,0 7.177,3.219 7.177,7.176 0,3.959 -3.22,7.178 -7.177,7.178 m -16.748,-38.279 c 0,-2.639 2.147,-4.785 4.785,-4.785 h 14.355 v 14.354 h -19.14 v -9.569 z m 43.065,9.569 h -19.14 v -14.354 h 19.14 v 14.354 z m 23.925,0 h -19.141 v -14.354 h 19.141 v 14.354 z m 4.786,-19.14 H 245.57 c -5.285,0 -9.57,4.285 -9.57,9.57 v 23.925 c 0,5.285 4.285,9.568 9.57,9.568 h 0.242 c 1.108,5.459 5.932,9.57 11.721,9.57 5.786,0 10.612,-4.111 11.72,-9.57 h 29.194 c 1.107,5.459 5.932,9.57 11.721,9.57 5.786,0 10.611,-4.111 11.72,-9.57 h 0.242 c 5.285,0 9.569,-4.283 9.569,-9.568 v -14.356 c 0,-10.553 -8.586,-19.139 -19.138,-19.139" id="path5" connector-curvature="0"></path><path d="m 257.533,295.574 c -1.321,0 -2.392,1.072 -2.392,2.395 0,1.32 1.071,2.391 2.392,2.391 1.321,0 2.392,-1.07 2.392,-2.391 -0.001,-1.323 -1.071,-2.395 -2.392,-2.395" id="path7" connector-curvature="0"></path><path d="m 310.168,295.574 c -1.321,0 -2.393,1.072 -2.393,2.395 0,1.32 1.071,2.391 2.393,2.391 1.32,0 2.392,-1.07 2.392,-2.391 0,-1.323 -1.072,-2.395 -2.392,-2.395" id="path9" connector-curvature="0">
-							</path>
-							<animateTransform attributeType="XML" attributeName="transform" type="translate" from="-350,-257.295" to="-130,-257.295" dur="3s" repeatCount="indefinite"/>
-						</g>
-					</svg>
+					<div class="col-xs-3">
+						<div ng-hide="ride.startsIn<=1" class="starts-in">
+							<div>{{ride.startsIn}}</div>
+							<div>
+								<small>{{ride.from.format("HH:mm")}} - {{ride.to.format("HH:mm")}}</small>
+							</div>
+						</div>
+						<svg ng-show="ride.startsIn<=1"  x="0px" y="0px" width="95.698997" height="52.632999" viewBox="0 0 95.698999 52.633" enable-background="new 0 0 566.93 566.93" xml:space="preserve" version="0.48.4 r9939"><metadata id="metadata15"><rdf:RDF><cc:Work about=""><dc:format>image/svg+xml</dc:format><dc:type resource="http://purl.org/dc/dcmitype/StillImage"></dc:type></cc:Work></rdf:RDF></metadata><defs id="defs13"></defs><sodipodi:namedview pagecolor="#ffffff" bordercolor="#666666" borderopacity="1" objecttolerance="10" gridtolerance="10" guidetolerance="10" pageopacity="0" pageshadow="2" window-width="1855" window-height="1056" id="namedview11" showgrid="false" fit-margin-top="0" fit-margin-left="0" fit-margin-right="0" fit-margin-bottom="0" zoom="0.41627715" cx="47.464999" cy="26.463" window-x="1665" window-y="24" window-maximized="1" current-layer="Ebene_1"></sodipodi:namedview>
+							<g fill="{{ride.hexcode}}" transform="translate(-236,-257.295)">
+								<path d="m 312.561,276.435 v -14.354 c 7.928,0 14.354,6.427 14.354,14.354 h -14.354 z m 14.354,14.356 c 0,2.637 -2.147,4.785 -4.785,4.785 h -0.242 c -1.108,-5.461 -5.934,-9.57 -11.72,-9.57 -5.789,0 -10.613,4.109 -11.721,9.57 h -9.812 V 281.22 h 38.28 v 9.571 z m -16.747,14.354 c -3.958,0 -7.178,-3.219 -7.178,-7.178 0,-3.957 3.22,-7.176 7.178,-7.176 3.957,0 7.177,3.219 7.177,7.176 0,3.959 -3.22,7.178 -7.177,7.178 m -40.915,-9.569 c -1.108,-5.461 -5.934,-9.57 -11.72,-9.57 -5.789,0 -10.613,4.109 -11.721,9.57 h -0.242 c -2.638,0 -4.785,-2.148 -4.785,-4.785 v -9.571 h 43.065 v 14.356 h -14.597 z m -11.72,9.569 c -3.958,0 -7.178,-3.219 -7.178,-7.178 0,-3.957 3.22,-7.176 7.178,-7.176 3.957,0 7.177,3.219 7.177,7.176 0,3.959 -3.22,7.178 -7.177,7.178 m -16.748,-38.279 c 0,-2.639 2.147,-4.785 4.785,-4.785 h 14.355 v 14.354 h -19.14 v -9.569 z m 43.065,9.569 h -19.14 v -14.354 h 19.14 v 14.354 z m 23.925,0 h -19.141 v -14.354 h 19.141 v 14.354 z m 4.786,-19.14 H 245.57 c -5.285,0 -9.57,4.285 -9.57,9.57 v 23.925 c 0,5.285 4.285,9.568 9.57,9.568 h 0.242 c 1.108,5.459 5.932,9.57 11.721,9.57 5.786,0 10.612,-4.111 11.72,-9.57 h 29.194 c 1.107,5.459 5.932,9.57 11.721,9.57 5.786,0 10.611,-4.111 11.72,-9.57 h 0.242 c 5.285,0 9.569,-4.283 9.569,-9.568 v -14.356 c 0,-10.553 -8.586,-19.139 -19.138,-19.139" id="path5" connector-curvature="0"></path><path d="m 257.533,295.574 c -1.321,0 -2.392,1.072 -2.392,2.395 0,1.32 1.071,2.391 2.392,2.391 1.321,0 2.392,-1.07 2.392,-2.391 -0.001,-1.323 -1.071,-2.395 -2.392,-2.395" id="path7" connector-curvature="0"></path><path d="m 310.168,295.574 c -1.321,0 -2.393,1.072 -2.393,2.395 0,1.32 1.071,2.391 2.393,2.391 1.32,0 2.392,-1.07 2.392,-2.391 0,-1.323 -1.072,-2.395 -2.392,-2.395" id="path9" connector-curvature="0">
+								</path>
+								<animateTransform attributeType="XML" attributeName="transform" type="translate" from="-350,-257.295" to="-130,-257.295" dur="3s" repeatCount="indefinite"/>
+							</g>
+						</svg>
 					</div>
-					<div class="col-xs-9 drawn-route">
-					<svg width="100%" height="100%">
-					  <circle cx="18" cy="50%" r="18" stroke-width="4" fill="{{ride.hexcode}}" />
-
-                      		          <line x1="18" y1="50%" x2="90%" y2="50%" stroke="{{ride.hexcode}}" stroke-width="6px" />
-
-					   <g ng-repeat="stop in ride.passlist" ng-if="ride.passlist.length>=4 && $index<4">
-					   	<circle ng-attr-cx="{{($index+1)*20}}%" cy="50%" r="18" stroke="{{ride.hexcode}}" stroke-width="4" fill="#fff" />
-						<text fill="#000">
-							<tspan ng-attr-x="{{(($index+1)*20)}}%" ng-attr-y="{{$index%2==0?120:15}}">{{getFirstPart(stop.ORT_NAME)}}</tspan>
-						  	<tspan ng-attr-x="{{(($index+1)*20)}}%" ng-attr-y="{{$index%2==0?140:35}}">{{getSecondPart(stop.ORT_NAME)}}</tspan>
-						</text>
-					  </g>
-					  <g ng-repeat="stop in ride.passlist" ng-if="ride.passlist.length<4">
-					   	<circle ng-attr-cx="{{($index+1)*30}}%" cy="50%" r="18" stroke="{{ride.hexcode}}" stroke-width="4" fill="#fff" />
-						<text fill="#000">
-							<tspan ng-attr-x="{{(($index+1)*30)}}%" ng-attr-y="{{$index%2==0?120:15}}">{{getFirstPart(stop.ORT_NAME)}}</tspan>
-						  	<tspan ng-attr-x="{{(($index+1)*30)}}%" ng-attr-y="{{$index%2==0?140:35}}">{{getSecondPart(stop.ORT_NAME)}}</tspan>
-						</text>
-					  </g>
-					  <circle cx="90%" cy="50%" r="24" stroke="{{ride.hexcode}}" stroke-width="12" fill="#fff" />
-					  <text fill="{{ride.hexcode}}">
-						<tspan x="90%" y="125">{{getFirstPart(ride.last_station)}}</tspan>
-					  	<tspan x="90%" y="145">{{getSecondPart(ride.last_station)}}</tspan>
-					  </text>
-					</svg>
+						<div class="col-xs-3">{{ride.SpaceDesc}}</div>
+						<div class="col-xs-6" >
+							<div ng-show="ride.EventDescriptionEN!=ride.EventDescriptionDE">
+								<strong>
+								{{ride.EventDescriptionDE}}<br/>
+								{{ride.EventDescriptionIT}}<br/>
+								{{ride.EventDescriptionEN}}
+							</strong>
+							</div>
+							<div ng-show="ride.EventDescriptionEN==ride.EventDescriptionDE">
+								<strong>{{ride.EventDescriptionEN}}<br/>
+								<small class="subtitle">{{ride.Subtitle}}</small></strong>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-</div>
-<div class="footer" ng-init="initInfos()">
-	<!--<div style="font-size:30px;"> Dies ist ein Test des Dienstes! - Questo è un Test del servizio! - This is a beta test of the service!</div>-->
-	<div ng-repeat="note in notes">
-               <div class="notes hwacceleration" id="element{{$index}}"><span class="hwacceleration" ng-bind-html="note.text"></span></div>
-       </div>
-</div>
+		<!-- <div class="footer" ng-init="initInfos()">
+		<div ng-repeat="note in notes">
+		<div class="notes hwacceleration" id="element{{$index}}"><span class="hwacceleration" ng-bind-html="note.text"></span></div>
+	</div>
+</div> -->
 </div>

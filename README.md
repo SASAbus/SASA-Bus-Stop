@@ -1,9 +1,7 @@
-SASA-Bus-Stop
+NOI-display
 =============
 
-is a simple website which displays the live tracking data of the urban buses in Bolzano.
-The implementation is fully client-side, using simple jsonp calls to retrieve data.
-Displays incoming and the arrival time in minutes for incoming busses .
+is a simple website which displays the events happening at the NOI Techpak in Bolzano/Bozen.
 
 Technologies used:
 ---------------------

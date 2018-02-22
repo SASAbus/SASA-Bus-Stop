@@ -100,7 +100,7 @@ noiDisplay.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http
 			enddate: ($routeParams.to != undefined ? $routeParams.to : defaultStartDate) + eventsTill  ,
 			eventlocation: $routeParams.location != undefined ? $routeParams.location : 'NOI',
 			datetimeformat:'uxtimestamp',
-			onlyactive: $routeParams.active != undefined ? $routeParams.active : false
+			onlyactive: $routeParams.active != undefined ? $routeParams.active : "" 
     		}
 		$http.get("https://service.suedtirol.info/api/EventShort/GetbyRoomBooked?"+$.param(params)).then(function(response,error) {
 			var data = response.data;

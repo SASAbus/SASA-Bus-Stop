@@ -47,10 +47,10 @@ noiDisplay.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http
   var numberOfRides = 100;			// max number of rides to display
   var rideId = 5029;  			//id of the busstop (e.g. id 1 = trainstation Merano)
   var scrollFactor=8; 			//bigger is slower(decimal can be used)
-  var ridesUpdateIntervall = 30000;	// time in milliseconds
+  var ridesUpdateIntervall = 3000;	// time in milliseconds
   var infosUpdateIntervall = 12*60*60*1000;	// time in milliseconds
-  var noiColors =['f3d111','f7dd41','becf40','a8c038','de7226','e79441','bfdaee','a9cde8','517435','7c9762','b41f3b','c6526b']; 
-  //                dd hh minutes 
+  var noiColors =['f3d111','f7dd41','becf40','a8c038','de7226','e79441','bfdaee','a9cde8','517435','7c9762','b41f3b','c6526b'];
+  //                days in the future to display
   var eventsTill =  14*24*60*60*1000;
 
   self.replaceSvg= function(){
@@ -84,34 +84,32 @@ noiDisplay.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http
   }
   if ($routeParams.rideId != null)
   rideId = $routeParams.rideId;
-  self.rides = new Array();
   self.refreshRides = function(){
-    $interval(function(){
-	self.fetchData(self.elaborateData);
-    },ridesUpdateIntervall);
-  }
-  self.initRides = function(){
-	self.fetchData(self.elaborateData);
+    function callWebservice(){
+      self.fetchData(self.elaborateData);
+    }
+    callWebservice();
+    $interval(callWebservice,ridesUpdateIntervall);
   }
   self.fetchData = function(callback){
-		var defaultStartDate = new Date().getTime();
-    		var params = {
-			startdate: $routeParams.from != undefined ? $routeParams.from : defaultStartDate,
-			enddate: ($routeParams.to != undefined ? $routeParams.to : defaultStartDate) + eventsTill  ,
-			eventlocation: $routeParams.location != undefined ? $routeParams.location : 'NOI',
-			datetimeformat:'uxtimestamp',
-			onlyactive: $routeParams.active != undefined ? $routeParams.active : "" 
-    		}
-		$http.get("https://service.suedtirol.info/api/EventShort/GetbyRoomBooked?"+$.param(params)).then(function(response,error) {
-			var data = response.data;
-			if (response.status != 200 || data == null || data.length===0){
-				self.warning=true;
-			}else{
-				callback(data);
-			}
-    		});
+    var defaultStartDate = new Date().getTime();
+    var params = {
+      startdate: $routeParams.from != undefined ? $routeParams.from : defaultStartDate,
+      enddate: ($routeParams.to != undefined ? $routeParams.to : defaultStartDate) + eventsTill  ,
+      eventlocation: $routeParams.location != undefined ? $routeParams.location : 'NOI',
+      datetimeformat:'uxtimestamp',
+      onlyactive: $routeParams.active != undefined ? $routeParams.active : ""
     }
-    self.initInfos = function(){
+    $http.get("https://service.suedtirol.info/api/EventShort/GetbyRoomBooked?"+$.param(params)).then(function(response,error) {
+      var data = response.data;
+      if (response.status != 200 || data == null || data.length===0){
+        self.warning=true;
+      }else{
+        callback(data);
+      }
+    });
+  }
+  self.initInfos = function(){
     self.refreshInfos();
     self.loopInfos();
     self.moveNote();
@@ -146,8 +144,8 @@ noiDisplay.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http
       var newRides = self.arr_diff(data,self.rides);
       var departedRides = self.arr_diff(self.rides,data);
       for(i in departedRides){
-	if (self.rides[departedRides[i]].RoomEndDateUTC < new Date().getTime())
-	        self.rides.splice(departedRides[i],1);
+        if (self.rides[departedRides[i]].RoomEndDateUTC < new Date().getTime())
+        self.rides.splice(departedRides[i],1);
       }
       for (i in newRides){
         self.rides.push(data[newRides[i]]);
@@ -178,12 +176,12 @@ noiDisplay.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http
     for (i in arr1){
       var busExists=false;
       for(j in arr2){
-       	if (arr2[j].EventId === arr1[i].EventId && arr2[j].SpaceDesc === arr1[i].SpaceDesc){
+        if (arr2[j].EventId === arr1[i].EventId && arr2[j].SpaceDesc === arr1[i].SpaceDesc){
           busExists=true;
-	  for (key in arr2[j]){
-		if (arr2[j][key]!=arr1[i][key])
-			arr2[j][key]=arr1[i][key];
-	  }
+          for (key in arr2[j]){
+            if (arr2[j][key]!=arr1[i][key])
+            arr2[j][key]=arr1[i][key];
+          }
         }
       }
       if(!busExists)

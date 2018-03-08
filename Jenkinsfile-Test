@@ -1,0 +1,26 @@
+pipeline {
+	agent any
+	stages {
+		stage('Config'){
+			steps{
+				sh 'true'
+			}
+		}
+		stage('Test') {
+			steps {
+				sh 'test ! -f index.html'
+				sh 'test ! -f js/controller.js'
+			}
+		}
+		stage('Build'){
+			steps{
+				sh 'jar -cvf noi-display.war js/ index.html partials/ img/ css/'
+			}
+		}
+		stage('Archive'){
+			steps{
+				sh 'cp -f noi-display.war /var/builds/test-server/'
+			}
+		}
+	}
+}

@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Test') {
+            steps {
+               sh 'test ! -f index.html'
+               sh 'test ! -f js/controller.js'
+            }
+        }
+    }
+}

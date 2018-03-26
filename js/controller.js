@@ -36,7 +36,6 @@ noiDisplay.directive('eventDisplay',function(){
 		var elaborateData = function(data)	{
 			if (!data) return;
 			data = data.slice(0,config.numberOfRides);
-
 			var newRides = arr_diff(data,self.rides);
 			var departedRides = arr_diff(self.rides,data);
 			for (i in data){
@@ -48,22 +47,32 @@ noiDisplay.directive('eventDisplay',function(){
 				if (self.rides[departedRides[i]].RoomEndDateUTC < new Date().getTime())
 				self.rides.splice(departedRides[i],1);
 			}
+			syncExisting(self.rides, data);
 			for (i in newRides){
 				data[newRides[i]].hexcode= '#'+config.tickColors[(Math.trunc(Math.random() * 100) % config.tickColors.length)];
 				self.rides.push(data[newRides[i]]);
 			}
+		}
+		var syncExisting = function(arr1,arr2){
+			for (i in arr1)
+				for (j in arr2){
+					if (arr2[j].EventId === arr1[i].EventId){
+						arr1[i]['EventDescriptionDE'] = arr2[j]['EventDescriptionDE'];
+						arr1[i]['EventDescriptionEN'] = arr2[j]['EventDescriptionEN'];
+						arr1[i]['EventDescriptionIT'] = arr2[j]['EventDescriptionIT'];
+						arr1[i]['from'] = arr2[j]['from'];
+						arr1[i]['to'] = arr2[j]['to'];
+						arr1[i]['startsIn'] = arr2[j]['startsIn'];
+					}
+				}
 		}
 		var arr_diff = function(arr1,arr2){
 			var array = new Array();
 			for (i in arr1){
 				var busExists=false;
 				for(j in arr2){
-					if (arr2[j].EventId === arr1[i].EventId && arr2[j].SpaceDesc === arr1[i].SpaceDesc){
+					if (arr2[j].EventId === arr1[i].EventId){
 						busExists=true;
-						for (key in arr2[j]){
-							if (arr2[j][key]!=arr1[i][key])
-							arr2[j][key]=arr1[i][key];
-						}
 					}
 				}
 				if(!busExists)

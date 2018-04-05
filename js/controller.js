@@ -28,7 +28,6 @@ noiDisplay.directive('eventDisplay',function(){
 	var config = {
 		tickColors :['f3d111','f7dd41','becf40','a8c038','de7226','e79441','bfdaee','a9cde8','517435','7c9762','b41f3b','c6526b'],
 		numberOfRides : 100,			// max number of rides to display
-		ridesUpdateIntervall : 3000,	// time in milliseconds
 	};
 	function link(self, element, attrs){
 		if (!self.rides)
@@ -95,6 +94,7 @@ noiDisplay.directive('eventDisplay',function(){
 noiDisplay.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$sce) {
 	var self= $scope;
 	const eventsTill = 14*24*60*60*1000;
+	const updateIntervall = 30000;
 
 	self.init = function(){
 		fetchData().then(function(data){
@@ -111,7 +111,7 @@ noiDisplay.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http
 				self.warning = true;
 				console.error("unable to retrieve data:" + error);
 			});
-		},3000);
+		},updateIntervall);
 	}
 
 	var fetchData = function (){

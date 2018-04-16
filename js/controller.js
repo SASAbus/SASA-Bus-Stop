@@ -37,11 +37,24 @@ noiDisplay.directive('eventDisplay',function(){
 			data = data.slice(0,config.numberOfRides);
 			var newRides = arr_diff(data,self.rides);
 			var departedRides = arr_diff(self.rides,data);
+			var now = moment();
 			for (i in data){
 				data[i].from = moment(data[i].RoomStartDateUTC);
-				data[i].startsIn = moment().to(data[i].from);
+				data[i].startsIn = now<data[i].from ? now.to(data[i].from) : 'in progress';
 				data[i].to = moment(data[i].RoomEndDateUTC);
+				data[i].time = elaborate(data[i].from,data[i].to,now)
 			}
+			function elaborate(from,to,now){
+                                var value;
+                                if (from.isSame(to,'day'))
+                                	value = from.format("DD/MM HH:mm")+' - '+to.format("HH:mm");
+                                	//value = from.format("DD/MM HH:mm")+' - '+to.format("HH:mm")
+                                else
+                                	value = from.format("DD/MM HH:mm")+' - '+to.format("DD/MM HH:mm");
+                                return value;
+                                
+                        }
+
 			for(i in departedRides){
 				if (self.rides[departedRides[i]].RoomEndDateUTC < new Date().getTime())
 				self.rides.splice(departedRides[i],1);

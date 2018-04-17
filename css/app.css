@@ -230,6 +230,10 @@ svg text tspan{
 		font-size: 2em;
 		padding:3px 0;
 	}
+	.slideshow-container{
+		background-size: contain;
+		background-repeat:repeat;
+	}
 }
 @media screen and (min-width: 2000px) and (orientation: landscape){
 	html,body{

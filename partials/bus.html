@@ -16,10 +16,9 @@
 		</header>
 		<div class="slideshow-container">
 			<div ng-show="warning">Site under mantainance!!!</div>
-			<div class="content container-fluid">
+			<div class="content container-fluid" style="opacity:0.9">
 				<div class="lines">
 					<div ng-repeat="ride in rides | orderBy:'from'" class="row line">
-						<div class="marker"><div style="background-color: {{ride.hexcode}}"></div></div>
 						<div class="col-xs-3 col-xs-offset-1 col-lg-3 col-lg-offset-0">
 							<div class="starts-in">
 								<div>{{ride.startsIn}}</div>

@@ -224,15 +224,15 @@ svg text tspan{
 	.clock{
 		font-size:1em;
 	}
+	.slideshow-container{
+		background-size: contain;
+		background-repeat:repeat;
+	}
 }
 @media screen and (min-width: 320px) and (max-width: 812px) and (orientation: landscape){
 	.headline{
 		font-size: 2em;
 		padding:3px 0;
-	}
-	.slideshow-container{
-		background-size: contain;
-		background-repeat:repeat;
 	}
 }
 @media screen and (min-width: 2000px) and (orientation: landscape){

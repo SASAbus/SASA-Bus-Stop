@@ -205,8 +205,12 @@ svg text tspan{
 }
 @media screen and (min-width: 320px) and (max-width: 812px) {
   .line{
-	  font-size:14px;
-		height:22vh;
+	font-size:12px;
+	padding:0;
+	height:18vh;
+  }
+  .line .label{
+	font-size:1.5vw;
   }
   body{
 		overflow:auto;

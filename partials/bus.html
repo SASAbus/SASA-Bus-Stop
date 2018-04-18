@@ -1,4 +1,4 @@
-<div ng-controller="BusStopCtrl" style="width:100%">
+<div>
 	<header>
 		<div class="container-fluid">
 			<div class="row headline">
@@ -16,15 +16,13 @@
 		</header>
 		<div class="slideshow-container">
 			<div ng-show="warning">Site under mantainance!!!</div>
-			<div class="content container-fluid" style="opacity:0.9">
+			<div class="content container-fluid">
 				<div class="lines">
 					<div ng-repeat="ride in rides | orderBy:'from'" class="row line">
-						<div class="col-xs-3 col-xs-offset-1 col-lg-3 col-lg-offset-0">
+						<div class="col-xs-4 col-lg-3 col-lg-offset-0">
 							<div class="starts-in">
-								<div>{{ride.startsIn}}</div>
-								<div>
-									<small>{{ride.time}}</small>
-								</div>
+								<div><strong>{{ride.startsIn}}</strong></div>
+								<div><small  ng-bind-html="ride.time"></small></div>
 							</div>
 						</div>
 						<div class="col-xs-3">{{ride.SpaceDesc}}</div>
@@ -40,6 +38,7 @@
 									{{ride.EventDescriptionIT}}<br/>
 									{{ride.EventDescriptionEN}}
 								</strong>
+								<div class="label label-primary" ng-show="ride.CompanyName">by {{ride.CompanyName}} </div>
 							</div>
 							<div ng-show="ride.EventDescriptionEN==ride.EventDescriptionDE">
 								<a ng-show="ride.EventWebAddress" href="{{ride.EventWebAddress}}" target="_blank">
@@ -50,6 +49,7 @@
 									{{ride.EventDescriptionEN}}<br/>
 									<small class="subtitle">{{ride.Subtitle}}</small>
 								</strong>
+								<div class="label label-info" ng-show="ride.CompanyName">{{ride.CompanyName}} </div>
 							</div>
 						</div>
 					</div>

@@ -25,9 +25,10 @@
 								<div><small  ng-bind-html="ride.time"></small></div>
 							</div>
 						</div>
-						<div class="col-xs-3">{{ride.SpaceDesc}}</div>
+						<div class="col-xs-3">{{ride.SpaceDesc}}
+						</div>
 						<div class="col-xs-5" >
-							<div ng-show="ride.EventDescriptionEN!=ride.EventDescriptionDE">
+							<div ng-show="ride.EventDescriptionEN!=ride.EventDescriptionDE" class="multirow">
 								<a ng-show="ride.EventWebAddress" href="{{ride.EventWebAddress}}" target="_blank">
 									{{ride.EventDescriptionDE}}<br/>
 									{{ride.EventDescriptionIT}}<br/>
@@ -38,7 +39,7 @@
 									{{ride.EventDescriptionIT}}<br/>
 									{{ride.EventDescriptionEN}}
 								</strong>
-								<div class="label label-unimportant" ng-show="ride.CompanyName">by {{ride.CompanyName}} </div>
+								<div class="label label-unimportant" ng-show="ride.CompanyName">{{ride.CompanyName}} </div>
 							</div>
 							<div ng-show="ride.EventDescriptionEN==ride.EventDescriptionDE">
 								<a ng-show="ride.EventWebAddress" href="{{ride.EventWebAddress}}" target="_blank">
@@ -49,7 +50,7 @@
 									{{ride.EventDescriptionEN}}<br/>
 									<small class="subtitle">{{ride.Subtitle}}</small>
 								</strong>
-								<div class="label label-unimportant" ng-show="ride.CompanyName">{{ride.CompanyName}} </div>
+								<div class="label label-unimportant" ng-show="ride.CompanyName">{{ride.CompanyName.split("/")[0].split("-")[0]}} </div>
 							</div>
 						</div>
 					</div>

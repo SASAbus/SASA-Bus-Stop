@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-               sh 'test -f index.html'
-               sh 'test -f js/controller.js'
+               sh 'test -f public/index.html'
+               sh 'test -f public/js/controller.js'
             }
         }
     }

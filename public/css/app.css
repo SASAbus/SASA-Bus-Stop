@@ -52,6 +52,7 @@ h1{
 			display: flex;
 			align-items: center;
 			justify-content: center;
+		overflow:hidden;
 }
 .line:nth-child(2n-1){
 	background-color:#fff;
@@ -246,5 +247,8 @@ svg text tspan{
 }
 .label-unimportant{
 	background-color:#d3d3d3;
+	font-size:60%;
+}
+.multirow{
 	font-size:60%;
 }

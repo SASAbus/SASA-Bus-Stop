@@ -46,12 +46,12 @@ noiDisplay.directive('eventDisplay',function(){
 			}
 			function elaborate(from,to,now){
                                 var value;
-                                if (from.isSame(to,'day'))
+                                /*if (from.isSame(to,'day'))
                                 	value = from.format("DD/MM")+'<br/>'+from.format("HH:mm")+' - '+to.format("HH:mm");
                                 else
-                                	value = from.format("DD/MM HH:mm")+'<br/> '+to.format("DD/MM HH:mm");
+																*/
+                                value = from.format("HH:mm")+' - '+to.format("HH:mm") +'<br/><strong>' +from.format("Do MMM YY")+'</strong>';
                                 return value;
-                                
                         }
 
 			for(i in departedRides){

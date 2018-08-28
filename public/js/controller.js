@@ -50,7 +50,7 @@ noiDisplay.directive('eventDisplay',function(){
                                 	value = from.format("DD/MM")+'<br/>'+from.format("HH:mm")+' - '+to.format("HH:mm");
                                 else
 																*/
-                                value = from.format("HH:mm")+' - '+to.format("HH:mm") +'<br/><strong>' +from.format("Do MMM YY")+'</strong>';
+                                value = from.format("HH:mm")+' - '+to.format("HH:mm") +'<br/><strong>' +from.format("DD MMM YY")+'</strong>';
                                 return value;
                         }
 

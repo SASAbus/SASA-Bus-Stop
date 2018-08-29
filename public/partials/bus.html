@@ -4,7 +4,7 @@
 				<strong>TODAY</strong>.NOI.BZ.IT
 			</h1>
 			<div class="pull-right">
-				<img  src="img/noi-logo.png" class="noi-logo"/>
+				<a href="https://noi.bz.it" target="_blank"><img  src="img/noi-logo.png" class="noi-logo"/></a>
 			</div>
 		</header>
 		<div class="slideshow-container">
@@ -40,12 +40,13 @@
 							<h2 ng-show="ride.EventDescriptionEN==ride.EventDescriptionDE">
 								<a ng-show="ride.EventWebAddress" href="{{ride.EventWebAddress}}" target="_blank">
 									{{ride.EventDescriptionEN}}<br/>
-									<small class="subtitle">{{ride.Subtitle}}</small>
+									<span ng-show="ride.Subtitle"> - {{ride.Subtitle}}</span>
 								</a>
 								<strong ng-show="!ride.EventWebAddress">
-									{{ride.EventDescriptionEN}}<br/>
-									<small class="subtitle">{{ride.Subtitle}}</small>
+									{{ride.EventDescriptionEN}}
+									<span ng-show="ride.Subtitle"> - {{ride.Subtitle}}</span>
 								</strong>
+								<br/>
 								<small ng-show="ride.CompanyName">{{ride.CompanyName.split("/")[0].split("-")[0]}} </small>
 							</h2>
 						</div>

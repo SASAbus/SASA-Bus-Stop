@@ -15,7 +15,7 @@ body,html{
 	height:100%;
 	width:100%;
 	text-align:center;
-	font-family:Arial,sans-serif !important;
+	font-family: 'Open Sans', sans-serif !important;
 	color:#000;
 }
 body>div{
@@ -270,19 +270,21 @@ BIG SCREEN
 		padding-bottom: 50px;
 	}
 	h1.title{
-		font-size: 180px;
+		font-size: 218px;
+		margin:0;
 	}
 	h2{
-		font-size: 80px;
+		font-size: 90px;
+    line-height: 1;
 	}
 	.starts-in{
 		text-align: right;
-		font-size: 90px;
+		font-size: 82px;
 		line-height: 100px;
 		justify-content: right;
 	}
 	.starts-in strong{
-		font-size: 97px;
+		font-size: 90px;
 	}
 	.clock{
 		font-size: 150px;
@@ -291,7 +293,7 @@ BIG SCREEN
 	}
 	.clock.day{
 		font-weight: normal;
-		font-size: 90px;
+		font-size: 80px;
 	}
 	.slideshow-container{
 		padding:50px 74px;
@@ -303,8 +305,8 @@ BIG SCREEN
 	}
 	.location{
 		padding:25px 70px;
-		margin:40px 80px;
-		font-size: 60px;
+		margin:10px 80px;
+		font-size: 65px;
 	}
 	.line{
 		height:16.2vh;

@@ -11,7 +11,7 @@
 			<div class="big-screen-header clearfix">
 				<div>
 					<div class="pull-left">
-						<h1 class="title"><strong>TODAY</strong>.BZ.IT</h1>
+						<h1 class="title"><strong>TODAY</strong>.NOI.BZ.IT</h1>
 					</div>
 					<div class="pull-right">
 						<div my-clock="HH:mm" class="clock"><!----></div>
@@ -51,7 +51,7 @@
 							</h2>
 						</div>
 						<div class="col-xs-12 col-lg-5 col-lg-offset-0" style="justify-content:flex-end">
-							<div class="location">{{ride.SpaceDesc}}</div>
+							<div class="location">{{ride.SpaceDesc.substring(ride.SpaceDesc.indexOf('NOI ')+4)}}</div>
 							<div class="starts-in">
 								<div><small  ng-bind-html="ride.time"></small></div>
 							</div>

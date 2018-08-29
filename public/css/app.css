@@ -246,17 +246,23 @@ svg text tspan{
 	font-size: 1.3em;
 }
 @media screen and (min-width: 320px) and (max-width: 812px) {
+	h1{
+		font-size: 2.6em;
+	}
+	header .pull-left,header .pull-right{
+		float:none !important;
+	}
   .line{
 	font-size:12px;
 	padding:0;
-	height:18vh;
+	height:auto;
   }
   .line .label{
 	font-size:1.3vw;
   }
   body{
 		overflow:auto;
-		padding-top:12vh;
+		padding-top:2vh;
   }
 	.headline{
 		height:12vh;
@@ -271,14 +277,22 @@ svg text tspan{
 		font-size:1em;
 	}
 	.slideshow-container{
-		background-size: contain;
 		background-repeat:repeat;
 	}
 }
-@media screen and (min-width: 320px) and (max-width: 812px) and (orientation: landscape){
+@media screen and (min-width: 320px) and (max-width: 812px) and (orientation: portrait){
 	.headline{
 		font-size: 2em;
 		padding:3px 0;
+	}
+	.line>div{
+		display: block;
+	}
+	.starts-in{
+		padding:15px;
+	}
+	.starts-in,.description{
+		text-align: center;
 	}
 }
 @media screen and (min-width: 3000px) and (orientation: landscape){

@@ -233,6 +233,12 @@ svg text tspan{
 	font-size: 1.8em;
 	font-weight: bold;
 }
+header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
 .big-screen-header{
 	display: none;
 }

@@ -369,7 +369,8 @@ BIG SCREEN
 		font-size: 65px;
 	}
 	.line{
-		height:16.2vh;
+		height:15vh;
+		margin-bottom:32px;
 	}
 	footer{
 		display: none;

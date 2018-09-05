@@ -63,7 +63,7 @@ h2{
 	background-color:white;
 	margin:0;
 	margin-bottom: 15px;
-	padding: 20px;
+	padding: 0 20px;
 	position:relative;
 	display:block;
 	height:17vh;
@@ -305,6 +305,9 @@ header{
 	}
 	.starts-in,.description{
 		text-align: center;
+	}
+	footer{
+		position: relative;
 	}
 }
 @media screen and (min-width: 3000px) and (orientation: landscape){

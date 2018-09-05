@@ -2,7 +2,7 @@
 	position:relative;
 	padding: 20px;
 	background-size: cover;
-	background-image: url(../img/noi.png);
+	background-image: url(../img/noi-bg.gif);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 }
@@ -19,6 +19,9 @@ body,html{
 	margin: 0;
   min-height: 100vh;
 	padding-bottom:20px;
+}
+strong{
+	font-weight: 600;
 }
 body>div{
 	width:100%;
@@ -329,27 +332,17 @@ header{
 BIG SCREEN
 */
 @media screen and (min-width: 3000px) and (orientation: landscape){
+	body,html{
+		font-size: 44px;
+	}
 	header {
 		display: none !important;
 	}
 	.big-screen-header{
-		display:block;
-		padding-bottom: 50px;
-	}
-	h1.title{
-		font-size: 218px;
-		margin:0;
-	}
-	h2{
-		font-size: 86px;
-    line-height: 1;
-	}
-	.starts-in{
-		font-size: 82px;
-		line-height: 100px;
-	}
-	.starts-in strong{
-		font-size: 90px;
+		display:flex;
+		justify-content: space-between;
+		align-items: center;
+		height:20vh
 	}
 	.clock{
 		font-size: 150px;
@@ -361,16 +354,16 @@ BIG SCREEN
 		font-size: 80px;
 	}
 	.slideshow-container{
-		padding:50px 74px;
+		padding:0 74px;
 	}
 	.location{
 		padding:25px 70px;
 		margin:10px 80px;
-		font-size: 65px;
 	}
 	.line{
-		height:15vh;
-		margin-bottom:32px;
+		height:18vh;
+		margin-top: 1vh;
+		margin-bottom:2vh;
 	}
 	footer{
 		display: none;

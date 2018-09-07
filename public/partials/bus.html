@@ -16,7 +16,7 @@
 			<div class="content container-fluid">
 				<div class="lines">
 					<div ng-repeat="ride in rides | orderBy:'from'" class="row line">
-						<div class="col-xs-12 description col-lg-7" >
+						<div class="col-xs-12 description col-lg-6" >
 							<h2 ng-show="ride.EventDescriptionEN != ride.EventDescriptionDE" class="multirow">
 								<a ng-show="ride.EventWebAddress" href="{{ride.EventWebAddress}}" target="_blank">
 									{{ride.EventDescriptionDE}}<br/>
@@ -43,8 +43,14 @@
 								<small ng-show="ride.CompanyName">{{ride.CompanyName.split("/")[0].split("-")[0]}} </small>
 							</h2>
 						</div>
-						<div class="col-xs-12 col-lg-5 col-lg-offset-0" style="justify-content:flex-end">
-							<div class="location">{{ride.SpaceDesc.substring(ride.SpaceDesc.indexOf('NOI ')+4)}}</div>
+						<div class="col-xs-12 col-lg-6 col-lg-offset-0" style="justify-content:flex-end">
+							<div class="location" >
+								<span ng-repeat="space in ride.SpaceDescList">
+									<span ng-show="$index <3 && $index > 0">,</span>
+									<span ng-show="$index<3">{{space.substring(space.indexOf('NOI ')+4)}}</span>
+									<span ng-show="$index == 3"> ...</span>
+								</span>
+							</div>
 							<div class="starts-in">
 								<div><small  ng-bind-html="ride.time"></small></div>
 							</div>

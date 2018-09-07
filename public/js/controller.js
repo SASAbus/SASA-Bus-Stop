@@ -66,7 +66,7 @@ noiDisplay.directive('eventDisplay',function(){
 		var syncExisting = function(arr1,arr2){
 			for (i in arr1)
 				for (j in arr2){
-					if (arr2[j].EventId === arr1[i].EventId && arr2[j].SpaceDesc === arr1[i].SpaceDesc && arr2[j].RoomStartDate === arr1[i].RoomStartDate){
+					if (arr2[j].EventId === arr1[i].EventId && arr2[j].RoomStartDate === arr1[i].RoomStartDate){
 						arr1[i]['EventDescriptionDE'] = arr2[j]['EventDescriptionDE'];
 						arr1[i]['EventDescriptionEN'] = arr2[j]['EventDescriptionEN'];
 						arr1[i]['EventDescriptionIT'] = arr2[j]['EventDescriptionIT'];
@@ -81,7 +81,7 @@ noiDisplay.directive('eventDisplay',function(){
 			for (i in arr1){
 				var busExists=false;
 				for(j in arr2){
-					if (arr2[j].EventId === arr1[i].EventId && arr2[j].SpaceDesc === arr1[i].SpaceDesc && arr2[j].RoomStartDate === arr1[i].RoomStartDate){
+					if (arr2[j].EventId === arr1[i].EventId && arr2[j].RoomStartDate === arr1[i].RoomStartDate){
 						busExists=true;
 					}
 				}

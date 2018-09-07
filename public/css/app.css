@@ -231,10 +231,11 @@ svg text tspan{
 .location{
 	color : #fff;
 	background-color: #000;
-	padding:20px 26px;
+	padding:10px 26px;
 	margin:20px 40px;
-	font-size: 1.8em;
+	font-size: 1.6em;
 	font-weight: bold;
+	max-width: 50%;
 }
 header{
 	display: flex;
@@ -360,7 +361,7 @@ BIG SCREEN
 		padding:0 74px;
 	}
 	.location{
-		padding:25px 70px;
+		padding:20px 70px;
 		margin:10px 80px;
 	}
 	.line{

@@ -372,3 +372,8 @@ BIG SCREEN
 		display: none;
 	}
 }
+@media screen and (min-width: 7000px) and (orientation: landscape){
+	html{
+		width:50vw;
+	}
+}

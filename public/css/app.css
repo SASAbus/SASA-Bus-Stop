@@ -345,7 +345,7 @@ BIG SCREEN
 		display:flex;
 		justify-content: space-between;
 		align-items: center;
-		height:20vh
+		height:430px;
 	}
 	.clock{
 		font-size: 150px;
@@ -364,9 +364,9 @@ BIG SCREEN
 		margin:10px 80px;
 	}
 	.line{
-		height:18vh;
-		margin-top: 1vh;
-		margin-bottom:2vh;
+		height:384px;
+		margin-top: 24px;
+		margin-bottom:48px;
 	}
 	footer{
 		display: none;

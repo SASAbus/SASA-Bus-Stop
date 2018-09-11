@@ -46,7 +46,7 @@
 						<div class="col-xs-12 col-lg-6 col-lg-offset-0" style="justify-content:flex-end">
 							<div class="location" >
 								<span ng-repeat="space in ride.SpaceDescList">
-									<span ng-show="$index <3 && $index > 0">,</span>
+									<span ng-show="$index <3 && $index > 0">, </span>
 									<span ng-show="$index<3">{{space.substring(space.indexOf('NOI ')+4)}}</span>
 									<span ng-show="$index == 3"> ...</span>
 								</span>

@@ -337,7 +337,8 @@ BIG SCREEN
 */
 @media screen and (min-width: 3000px) and (orientation: landscape){
 	body,html{
-		font-size: 44px;
+		font-size: 27px;
+		width:50vw;
 	}
 	header {
 		display: none !important;
@@ -373,8 +374,4 @@ BIG SCREEN
 		display: none;
 	}
 }
-@media screen and (min-width: 7000px) and (orientation: landscape){
-	html{
-		width:50vw;
-	}
 }

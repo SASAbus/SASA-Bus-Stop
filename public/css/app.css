@@ -337,7 +337,7 @@ BIG SCREEN
 */
 @media screen and (min-width: 3000px) and (orientation: landscape){
 	body,html{
-		font-size: 27px;
+		font-size: 21px;
 		width:50vw;
 	}
 	header {
@@ -347,31 +347,31 @@ BIG SCREEN
 		display:flex;
 		justify-content: space-between;
 		align-items: center;
-		height:430px;
+		height:10vh;
+		margin-bottom: 1vh;
 	}
 	.clock{
-		font-size: 150px;
-		line-height: 120px;
+		font-size: 3.4em;
+		line-height: 1;
 		font-weight: bold;
 	}
 	.clock.day{
 		font-weight: normal;
-		font-size: 80px;
+		font-size: 2em;
 	}
 	.slideshow-container{
 		padding:0 74px;
 	}
 	.location{
-		padding:20px 70px;
+		padding:10px 35px;
 		margin:10px 80px;
 	}
 	.line{
-		height:384px;
-		margin-top: 24px;
-		margin-bottom:48px;
+		height:9vh;
+		margin-top: 0.5vh;
+		margin-bottom:1vh;
 	}
 	footer{
 		display: none;
 	}
-}
 }

@@ -2,7 +2,7 @@
 	position:relative;
 	padding: 20px;
 	background-size: cover;
-	background-image: url(../img/noi-bg.gif);
+	background-image: url(../img/noi.svg);
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 }
@@ -13,7 +13,7 @@
 body,html{
 	width:100%;
 	text-align:center;
-	font-family:  'Source Sans Pro', sans-serif; !important;
+	font-family:  'Source Sans Pro', sans-serif !important;
 	color:#000;
 	font-size: 16px;
 	margin: 0;
@@ -166,7 +166,6 @@ h2{
 .clock{
 	font-size:80px;
 	line-height:80px;
-	padding-top:30px;
 }
 .headline{
 	font-size:54px;
@@ -243,9 +242,6 @@ header{
 	align-items: center;
 }
 
-.big-screen-header{
-	display: none;
-}
 .starts-in{
 	text-align: right;
 	font-size: 2em;
@@ -332,46 +328,43 @@ header{
 		font-size: 14px;
 	}
 }
-/*
-BIG SCREEN
-*/
-@media screen and (min-width: 3000px) and (orientation: landscape){
-	body,html{
-		font-size: 21px;
+.s4boht{
+		font-size: 9px;
 		width:50vw;
+		overflow: hidden;
 	}
-	header {
-		display: none !important;
-	}
-	.big-screen-header{
-		display:flex;
-		justify-content: space-between;
-		align-items: center;
-		height:10vh;
-		margin-bottom: 1vh;
-	}
-	.clock{
-		font-size: 3.4em;
-		line-height: 1;
-		font-weight: bold;
-	}
-	.clock.day{
-		font-weight: normal;
-		font-size: 2em;
-	}
-	.slideshow-container{
-		padding:0 74px;
-	}
-	.location{
-		padding:10px 35px;
-		margin:10px 80px;
-	}
-	.line{
-		height:9vh;
-		margin-top: 0.5vh;
-		margin-bottom:1vh;
-	}
-	footer{
-		display: none;
-	}
+.s4big-screen-header{
+	display:flex;
+	justify-content: space-between;
+	align-items: center;
+	height:10vh;
+}
+.s4clock{
+	font-size: 40px;
+	line-height: 1;
+	font-weight: bold;
+}
+.s4clock.day{
+	font-weight: normal;
+	font-size: 24px;
+}
+.s4slideshow-container{
+	padding:0 20px;
+}
+.s4starts-in{
+	font-size: 2.7em;
+}
+.s4location{
+	padding:8px 12px;
+	margin:10px 25px 10px 0;
+	font-size: 1.8em;
+}
+.s4line{
+	height:9vh;
+	margin-top: 0.5vh;
+	margin-bottom:1vh;
+}
+h1.title{
+	padding:5px;
+	font-size:7em;
 }

@@ -1,51 +1,38 @@
-	<header id="header">
+	<header id="header" ng-hide="foyer">
 			<h1>
 				<strong>TODAY</strong>.NOI.BZ.IT
 			</h1>
 			<a href="https://noi.bz.it" target="_blank"><img  src="img/noi-logo.png" class="noi-logo"/></a>
 		</header>
-		<div class="slideshow-container">
-			<div class="big-screen-header">
+		<div class="slideshow-container" ng-class="{'s4slideshow-container':foyer}">
+			<div ng-show="foyer" ng-class="{'s4big-screen-header':foyer}">
 				<h1 class="title"><strong>TODAY</strong>.NOI.BZ.IT</h1>
 				<div>
-					<div my-clock="HH:mm" class="clock"><!----></div>
-					<small my-clock="dd MMM yy" class="clock day"><!----></small>
+					<div my-clock="HH:mm" class="clock" ng-class="{s4clock:foyer}"><!----></div>
+					<small my-clock="dd MMM yy" class="clock day" ng-class="{s4clock:foyer}"><!----></small>
 				</div>
 			</div>
 			<div ng-show="warning">Site under mantainance!!!</div>
 			<div class="content container-fluid">
 				<div class="lines">
-					<div ng-repeat="ride in rides | orderBy:'from'" class="row line">
+					<div ng-repeat="ride in rides | orderBy:'from'" class="row line" ng-class="{s4line:foyer}">
 						<div class="col-xs-12 description col-lg-7" >
-							<h2 ng-show="ride.EventDescriptionEN != ride.EventDescriptionDE" class="multirow">
-								<a ng-show="ride.EventWebAddress" href="{{ride.EventWebAddress}}" target="_blank">
-									{{ride.EventDescriptionDE}}<br/>
-									{{ride.EventDescriptionIT}}<br/>
-									{{ride.EventDescriptionEN}}
-								</a>
-								<strong ng-show="!ride.EventWebAddress">
-									{{ride.EventDescriptionDE}}<br/>
-									{{ride.EventDescriptionIT}}<br/>
-									{{ride.EventDescriptionEN}}
-								</strong>
-								<small ng-show="ride.CompanyName">{{ride.CompanyName}} </small>
-							</h2>
 							<h2 ng-show="ride.EventDescriptionEN==ride.EventDescriptionDE">
 								<a ng-show="ride.EventWebAddress" href="{{ride.EventWebAddress}}" target="_blank">
-									{{ride.EventDescriptionEN}}<br/>
+									{{ride.EventDescription[lang]}}<br/>
 								</a>
 								<strong ng-show="!ride.EventWebAddress">
-									{{ride.EventDescriptionEN}}
+									{{ride.EventDescription[lang]}}
 								</strong>
 								<br/>
 								<small ng-show="ride.CompanyName">{{ride.CompanyName}} </small>
 							</h2>
 						</div>
 						<div class="col-xs-12 col-lg-5 col-lg-offset-0" style="justify-content:flex-end">
-							<div class="location" >
+							<div class="location" ng-class="{s4location:foyer}" >
 								<span ng-repeat="space in ride.SpaceDescList"><span ng-show="$index <3 && $index > 0">, </span><span ng-show="$index<3 ">{{space}}</span><span ng-show="$index == 3"> ...</span></span>
 							</div>
-							<div class="starts-in">
+							<div class="starts-in" ng-class="{'s4starts-in':foyer}">
 								<div><small  ng-bind-html="ride.time"></small></div>
 							</div>
 						</div>

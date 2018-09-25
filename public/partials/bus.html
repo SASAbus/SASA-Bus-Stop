@@ -17,7 +17,7 @@
 				<div class="lines">
 					<div ng-repeat="ride in rides | orderBy:'from'" class="row line" ng-class="{s4line:foyer}">
 						<div class="col-xs-12 description col-lg-7" >
-							<h2 ng-show="ride.EventDescriptionEN==ride.EventDescriptionDE">
+							<h2>
 								<a ng-show="ride.EventWebAddress" href="{{ride.EventWebAddress}}" target="_blank">
 									{{ride.EventDescription[lang]}}<br/>
 								</a>

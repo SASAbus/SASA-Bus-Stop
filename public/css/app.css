@@ -294,6 +294,10 @@ header{
 		font-size: 2em;
 		padding:3px 0;
 	}
+	.location{
+		max-width:none;
+		margin:0 40px;
+	}
 	.line>div{
 		display: block;
 	}
@@ -305,11 +309,6 @@ header{
 	}
 	footer{
 		position: relative;
-	}
-}
-@media screen and (min-width: 3000px) and (orientation: landscape){
-	html,body{
-		overflow:hidden;
 	}
 }
 

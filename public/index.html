@@ -1,5 +1,5 @@
 <!doctype html>
-<html ng-app="noiDisplay">
+<html ng-app="noiDisplay" ng-controller="BusStopCtrl" ng-class="{s4boht:foyer}">
 <head>
 	<title>NOI Today</title>
 	<meta charset="utf-8"/>
@@ -17,9 +17,9 @@
 <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600,700" rel="stylesheet">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 </head>
-<body ng-controller="BusStopCtrl" ng-init="init()">
+<body  ng-init="init()" ng-class="{s4boht:foyer}">
 	<div event-display="data"></div>
-	<footer>
+	<footer ng-hide="foyer">
 		<span class="pull-left">Service provided by IDM-S&uuml;dtirol-Alto Adige VAT: IT 02521490215</span>
 		<a href="https://www.idm-suedtirol.com" target="_blank" class="pull-right">ww.idm-sueditrol.com</a>
 	</footer>

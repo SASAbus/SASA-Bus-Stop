@@ -1,10 +1,14 @@
 var noiDisplay = angular.module('noiDisplay', ['ngSanitize']);
+noiDisplay.config(function($locationProvider) {
+	$locationProvider.html5Mode({
+  	enabled: true,
+  	requireBase: false
+	});
+});
 noiDisplay.directive('myClock', ['$interval', 'dateFilter', function($interval, dateFilter) {
-
 	function link(scope, element, attrs) {
 		var format,
 		timeoutId;
-
 		format = attrs.myClock;
 		updateTime();
 		function updateTime() {
@@ -24,12 +28,14 @@ noiDisplay.directive('myClock', ['$interval', 'dateFilter', function($interval, 
 	};
 }]);
 
-noiDisplay.directive('eventDisplay',function(){
+noiDisplay.directive('eventDisplay',function($interval){
 	var config = {
 		tickColors :['f3d111','f7dd41','becf40','a8c038','de7226','e79441','bfdaee','a9cde8','517435','7c9762','b41f3b','c6526b'],
 		numberOfRides : 100,			// max number of rides to display
 	};
+
 	function link(self, element, attrs){
+		self.lang= 'en';
 		if (!self.rides)
 			self.rides=[];
 		var elaborateData = function(data)	{
@@ -46,10 +52,6 @@ noiDisplay.directive('eventDisplay',function(){
 			}
 			function elaborate(from,to,now){
                                 var value;
-                                /*if (from.isSame(to,'day'))
-                                	value = from.format("DD/MM")+'<br/>'+from.format("HH:mm")+' - '+to.format("HH:mm");
-                                else
-																*/
                                 value = from.format("HH:mm")+' - '+to.format("HH:mm") +'<br/><strong>' +from.format("DD MMM YY")+'</strong>';
                                 return value;
                         }
@@ -90,7 +92,33 @@ noiDisplay.directive('eventDisplay',function(){
 			}
 			return array;
 		}
+		function getAvailableLanguages(data){
+			if (data){
+				var availableLanguages = new Set();
+				data.forEach(function(record){
+					var langs = Object.keys(record.EventDescription);
+					for (lang in langs)
+						availableLanguages.add(langs[lang]);
+				});
+				langArray = Array.from(availableLanguages);
+				console.debug("Available Languages:" + langArray);
+				return langArray;
+			}
+		}
 		self.$watch(attrs.eventDisplay,function(value){
+			var languages = getAvailableLanguages(value);
+			if (angular.isDefined(self.loopLanguages))
+				$interval.cancel(self.loopLanguages);
+			self.loopLanguages = $interval(function(){
+				var current = languages.indexOf(self.lang) | 0;
+				if (current == undefined || current == languages.length-1)
+					current = 0;
+				else {
+						current++;
+				}
+				self.lang = languages[current];
+				console.debug(self.lang);
+			},10000);
 			elaborateData(value);
 		});
 	}
@@ -102,12 +130,12 @@ noiDisplay.directive('eventDisplay',function(){
 	};
 });
 
-noiDisplay.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$sce) {
+noiDisplay.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http,$sce,$location) {
 	var self= $scope;
 	const eventsTill = 14*24*60*60*1000;
 	const updateIntervall = 30000;
-
 	self.init = function(){
+		$scope.foyer = ($location.search().location ==="foyer")
 		fetchData().then(function(data){
 			self.data = data;
 		}).catch(function(error){

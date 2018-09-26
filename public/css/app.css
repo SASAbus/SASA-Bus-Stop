@@ -46,6 +46,10 @@ h1{
 h2{
 	font-size: 2.3em;
 }
+h2 small{
+	font-weight:bold;
+	color:#8c8c8c;
+}
 .changes{
 	margin-right:10px
 }
@@ -252,7 +256,7 @@ header{
 	justify-content: right;
 }
 .starts-in strong{
-	font-size: 1.3em;
+	font-size: 1.25em;
 }
 @media screen and (min-width: 320px) and (max-width: 812px) {
 	h1{

@@ -1,0 +1,20 @@
+pipeline {
+  agent any
+  environment {
+    AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    GOOGLE_ANALYTICS = credentials('noi-display-ga')
+  }
+  stages {
+    stage('Configure'){
+      steps {
+        sh "sed -i '/<\\/html>/e cat ${GOOGLE_ANALYTICS}' public/index.html"
+      }
+    }
+    stage('Upload') {
+      steps {
+        s3Upload(bucket: 'today.noi.bz.it', acl: 'PublicRead', file: './public')
+      }
+    }
+  }
+}

@@ -1,12 +1,12 @@
 pipeline {
-    agent any
+  agent any
 
-    stages {
-        stage('Test') {
-            steps {
-               sh 'test -f public/index.html'
-               sh 'test -f public/js/controller.js'
-            }
-        }
-    }
+  stages {
+      stage('Test') {
+          steps {
+              sh 'test -f public/index.html'
+              sh 'test -f public/js/controller.js'
+          }
+      }
+  }
 }

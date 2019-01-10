@@ -101,7 +101,6 @@ noiDisplay.directive('eventDisplay',function($interval){
 						availableLanguages.add(langs[lang]);
 				});
 				langArray = Array.from(availableLanguages);
-				console.debug("Available Languages:" + langArray);
 				return langArray;
 			}
 		}
@@ -117,7 +116,6 @@ noiDisplay.directive('eventDisplay',function($interval){
 						current++;
 				}
 				self.lang = languages[current];
-				console.debug(self.lang);
 			},10000);
 			elaborateData(value);
 		});

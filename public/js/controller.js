@@ -162,7 +162,7 @@ noiDisplay.controller('BusStopCtrl', function BusStopCtrl($scope,$interval,$http
 					datetimeformat:'uxtimestamp',
 					onlyactive: true
 				}
-				$http.get("https://service.suedtirol.info/api/EventShort/GetbyRoomBooked?"+$.param(params)).then(function(response,error) {
+				$http.get("https://tourism.opendatahub.bz.it/api/EventShort/GetbyRoomBooked?"+$.param(params)).then(function(response,error) {
 					var data = response.data;
 					if (response.status != 200 || data == null || data.length===0){
 						reject(error);

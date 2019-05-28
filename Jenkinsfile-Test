@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+
+    environment {
+        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
+    }
+    
+    stages {
+        stage('Test') {
+            steps {
+                sh 'test -f public/index.html'
+                sh 'test -f public/js/controller.js'
+            }
+        }
+        stage('Upload') {
+            steps {
+                s3Upload(bucket: 'test.today.noi.bz.it', acl: 'PublicRead', file: './public')
+            }
+        }
+    }
+}

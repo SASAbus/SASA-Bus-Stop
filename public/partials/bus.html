@@ -2,7 +2,7 @@
 			<h1>
 				<strong>TODAY</strong>.NOI.BZ.IT
 			</h1>
-			<a href="https://noi.bz.it" target="_blank"><img  src="img/noi-logo.png" class="noi-logo"/></a>
+			<a href="https://noi.bz.it" target="_blank" aria-label="noi-logo"><img  src="img/noi-logo.png" class="noi-logo" alt="noi-logo"/></a>
 		</header>
 		<div class="slideshow-container" ng-class="{'s4slideshow-container':foyer}">
 			<div ng-show="foyer" ng-class="{'s4big-screen-header':foyer}">
@@ -19,10 +19,10 @@
 						<div class="col-xs-12 description col-lg-7" >
 							<h2>
 								<a ng-show="ride.EventWebAddress" href="{{ride.EventWebAddress}}" target="_blank">
-									{{ride.EventDescription[lang]}}
+									{{!!ride.EventDescription[lang]?ride.EventDescription[lang]:ride.EventDescription['en']}}
 								</a>
 								<strong ng-show="!ride.EventWebAddress">
-									{{ride.EventDescription[lang]}}
+									{{!!ride.EventDescription[lang]?ride.EventDescription[lang]:ride.EventDescription['en']}}
 								</strong>
 								<br/>
 								<small ng-show="ride.CompanyName">{{ride.CompanyName}} </small>
